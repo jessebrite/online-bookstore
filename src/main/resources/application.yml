@@ -12,6 +12,6 @@ spring:
         dialect: org.hibernate.dialect.MySQL8Dialect
 
 
-#  data:
-#    rest:
-#      base-path: /api/v1
+  data:
+    rest:
+      base-path: /api/v1
