@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BookService } from 'src/app/services/book.service';
+import { Observable } from 'rxjs';
 import { Book } from '../../common/book';
 
 @Component({
@@ -13,15 +14,20 @@ export class BookListComponent implements OnInit {
 
   constructor(private bookService: BookService) { }
 
-  listBooks() {
-    this.bookService.getBooks().subscribe(data => {
-      console.log(data)
-      this.books = data
-    })
+  public listBooks() {
+    this.bookService.getBooks().subscribe(
+      data => this.books = data),
+      this.handleError;
   }
 
   ngOnInit(): void {
     this.listBooks();
   }
+
+  private handleError(error: any): Observable<any> {
+    console.error('Something has gone wrong', error);
+    return error(error.message || error);
+  }
+
 
 }
