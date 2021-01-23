@@ -6,7 +6,7 @@ export class Book {
   imageUrl: string = '';
   active: boolean = false;
   unitsInStock: number = 0;
-  createdOn: Date = null;
-  updatedOn: Date = null;
+  createdOn: Date = new Date();
+  updatedOn: Date = new Date();
 
 }

@@ -1,6 +1,5 @@
 package com.onus.onlinebookstore.config;
 
-import com.onus.onlinebookstore.entity.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
@@ -18,8 +17,8 @@ public class repositoryConfig implements RepositoryRestConfigurer {
 
 	@Override
 	public void configureRepositoryRestConfiguration(
-//		Expose ID field in the REST endpoints
-				RepositoryRestConfiguration config, CorsRegistry cors) {
+//	Expose ID field in the REST endpoints
+		RepositoryRestConfiguration config, CorsRegistry cors) {
 		config.exposeIdsFor(entityManager
 			.getMetamodel()
 			.getEntities()
