@@ -1,18 +1,49 @@
- <div class="row">
-  <div class="col-lg-4 col-md-6 mb-4" *ngFor="let book of books">
-    <div class="card h-100">
-      <a href="#"><img class="card-img-top" img-responsive
-        [src]="book.imageUrl" alt="books"></a>
-      <div class="card-body">
-        <h4 class="card-title">
-          <a href="#">{{book.name}}</a>
-        </h4>
-        <h5>{{book.unitPrice | currency}}</h5>
-        <p class="card-text text-truncate">{{book.description}}</p>
+<!-- Page Content -->
+  <div class="container">
+
+    <div class="row">
+
+      <div class="col-lg-3">
+
+        <div class="list-group">
+          <a routerLink="/category/1" class="list-group-item"
+            routerLinkActive="bg-secondary text-white font-weight-bold">Minig</a>
+            <a routerLink="/category/2" class="list-group-item"
+            routerLinkActive="bg-secondary text-white font-weight-bold">Prining</a>
+            <a routerLink="/category/3" class="list-group-item"
+            routerLinkActive="bg-secondary text-white font-weight-bold">Casting</a>
+        </div>
+
       </div>
-      <div class="card-footer">
-        <button class="btn btn-primary float-right">Add Cart</button>
+      <!-- /.col-lg-3 -->
+
+      <div class="col-lg-9">
+
+      <!-- Page content -->
+       <div class="row">
+        <div class="col-lg-4 col-md-6 mb-4" *ngFor="let book of books">
+          <div class="card h-100">
+            <a href="#"><img class="card-img-top" img-responsive
+              [src]="book.imageUrl" alt="books"></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="#">{{book.name}}</a>
+              </h4>
+              <h5>{{book.unitPrice | currency}}</h5>
+              <p class="card-text text-truncate">{{book.description}}</p>
+            </div>
+            <div class="card-footer">
+              <button class="btn btn-secondary float-right">Add Cart</button>
+            </div>
+          </div>
+        </div>
       </div>
+
     </div>
+    <!-- /.col-lg-9 -->
+
   </div>
+  <!-- /.row -->
+
 </div>
+<!-- /.container -->

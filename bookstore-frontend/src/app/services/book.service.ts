@@ -11,13 +11,13 @@ import { Book } from '../common/book';
 })
 export class BookService {
 
-  private apiBaseUrl = 'http://localhost:8080/api/v1'
+  private apiBaseUrl = 'http://localhost:8080/api/v1/books'
 
   constructor(private httpClient: HttpClient) { }
 
-  public getBooks(): Observable<Book[]> {
-  	const url = `${this.apiBaseUrl}/books`;
-    return this.httpClient.get<GetResponseBook>(url)
+  public getBooks(categoryId: number): Observable<Book[]> {
+  	const searchUrl = `${this.apiBaseUrl}/search/category_id?id=${categoryId}`;
+    return this.httpClient.get<GetResponseBook>(searchUrl)
       .pipe(
         map(response => response._embedded.books)
     );
