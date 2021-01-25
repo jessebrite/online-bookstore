@@ -22,15 +22,18 @@ export class BookListComponent implements OnInit {
     const hasCategoryId: boolean = this.activatedRoute.snapshot.paramMap.has('id');
 
     if (hasCategoryId) {
-      this.currentCategoryId = +this.activatedRoute.snapshot.paramMap.get('id');
+      // using non-null assertion operator '!'
+      // since 'hasCategocyId' already contains a value
+      // it deals with "Object is possibly 'null'" error
+      this.currentCategoryId = +this.activatedRoute.snapshot.paramMap.get('id')!;
     } else {
       this.currentCategoryId = 1;
     }
 
-
     this.bookService.getBooks(this.currentCategoryId).subscribe(
-      data => this.books = data),
-      this.handleError;
+      data => { this.books = data },
+      this.handleError
+    );
   }
 
   ngOnInit(): void {

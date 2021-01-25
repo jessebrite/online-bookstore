@@ -8,7 +8,7 @@ const routes: Routes = [
 	{ path: 'books', component: BookListComponent },
 	{ path: 'category/:id', component: BookListComponent },
   { path: 'page-not-found', component: PageNotFoundComponent },
-  { path: '**', redirectTo: 'page-not-found' }
+  { path: '**', redirectTo: 'page-not-found', pathMatch: 'full' }
 ];
 
 @NgModule({
