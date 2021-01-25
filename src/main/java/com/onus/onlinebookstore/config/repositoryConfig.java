@@ -17,13 +17,18 @@ public class repositoryConfig implements RepositoryRestConfigurer {
 
 	@Override
 	public void configureRepositoryRestConfiguration(
-//	Expose ID field in the REST endpoints
+
 		RepositoryRestConfiguration config, CorsRegistry cors) {
-		config.exposeIdsFor(entityManager
-			.getMetamodel()
-			.getEntities()
+//	Expose ID field in the REST endpoints
+		config.exposeIdsFor(entityManager.getMetamodel()
+				.getEntities()
 			.stream()
-			.map(Type::getJavaType)
-			.toArray(Class[]::new));
+				.map(Type::getJavaType)
+				.toArray(Class[]::new));
+
+//	Configure global CORS for all endpoints
+		cors.addMapping("/**")
+			.allowedOrigins("*");
+
 	}
 }
