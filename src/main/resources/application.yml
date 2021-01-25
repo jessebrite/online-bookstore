@@ -11,7 +11,15 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
 
-
+#API endpoints
   data:
     rest:
       base-path: /api/v1
+
+#path for Swagger-UI docs
+springdoc:
+  swagger-ui:
+    path: /api/v1/swagger-ui.html
+
+  api-docs:
+    path: /api/v1/api-docs

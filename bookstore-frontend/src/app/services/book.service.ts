@@ -30,7 +30,7 @@ export class BookService {
   public getBookCategories(): Observable<BookCategory[]> {
     return this.httpClient.get<GetResponseBookCategory>(this.bookCategoryUrl)
       .pipe(
-        map(response => response._embedded.bookCategory)
+        map(response => response._embedded.bookCategories)
     );
   }
 

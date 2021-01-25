@@ -46,6 +46,20 @@
       <optional>true</optional>
     </dependency>
 
+<!--    Springdoc open-api & Swagger-UI documentation-->
+    <dependency>
+      <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-ui</artifactId>
+      <version>1.5.2</version>
+    </dependency>
+
+<!--    API to map data-rest endpoints-->
+    <dependency>
+      <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-data-rest</artifactId>
+      <version>1.5.2</version>
+    </dependency>
+
 <!--    Test utils-->
     <dependency>
       <groupId>org.springframework.boot</groupId>
