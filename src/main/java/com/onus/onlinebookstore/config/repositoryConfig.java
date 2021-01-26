@@ -21,7 +21,7 @@ public class repositoryConfig implements RepositoryRestConfigurer {
 		RepositoryRestConfiguration config, CorsRegistry cors) {
 //	Expose ID field in the REST endpoints
 		config.exposeIdsFor(entityManager.getMetamodel()
-				.getEntities()
+			.getEntities()
 			.stream()
 				.map(Type::getJavaType)
 				.toArray(Class[]::new));
