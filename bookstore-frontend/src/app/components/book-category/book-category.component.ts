@@ -10,16 +10,13 @@ import { BookCategory } from '../../common/book-category';
 })
 export class BookCategoryComponent implements OnInit {
 
-	bookCategories: BookCategory[] = [];
+  bookCategories: BookCategory[] = [];
 
   constructor(private bookService: BookService) { }
 
-  public listBookCategories() {
+  public listBookCategories(): void {
   	this.bookService.getBookCategories().subscribe(
-  		data => { 
-  			console.log('book categories', data);
-  			// this.bookCategories = data
-  		},
+  		data => { this.bookCategories = data },
   		this.handleError
   	);
   }

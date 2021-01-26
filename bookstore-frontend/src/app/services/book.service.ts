@@ -13,14 +13,12 @@ import { BookCategory } from '../common/book-category';
 })
 export class BookService {
 
-  private apiBaseUrl = 'http://localhost:8080/api/v1/books';
-
-  private bookCategoryUrl = 'http://localhost:8080/api/v1/book-categories';
+  private apiBaseUrl = 'http://localhost:8080/api/v1';
 
   constructor(private httpClient: HttpClient) { }
 
   public getBooks(categoryId: number): Observable<Book[]> {
-  	const searchUrl = `${this.apiBaseUrl}/search/category_id?id=${categoryId}`;
+    const searchUrl = `${this.apiBaseUrl}/books/search/category_id?id=${categoryId}`;
     return this.httpClient.get<GetResponseBook>(searchUrl)
       .pipe(
         map(response => response._embedded.books)
@@ -28,7 +26,8 @@ export class BookService {
   }
 
   public getBookCategories(): Observable<BookCategory[]> {
-    return this.httpClient.get<GetResponseBookCategory>(this.bookCategoryUrl)
+    const bookCategoryUrl = `${this.apiBaseUrl}//book-categories`;
+    return this.httpClient.get<GetResponseBookCategory>(bookCategoryUrl)
       .pipe(
         map(response => response._embedded.bookCategories)
     );
