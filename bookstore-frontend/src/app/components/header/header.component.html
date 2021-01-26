@@ -21,41 +21,47 @@
 <body>
 
   <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="#">Online Bookstore</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <div class="col-md-6">
-          <div class="row">
-            <div class="col-md-8">
-              <input type="text" class="form-control" placeholder="search books">
-            </div>
-            <div class="col-md-2">
-              <button class="btn btn-secondary">Search</button>
+  <div class="content">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">Online Bookstore</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-8">
+                <input type="text" class="form-control" placeholder="search books">
+              </div>
+              <div class="col-md-2">
+                <button class="btn btn-secondary">Search</button>
+              </div>
             </div>
           </div>
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" routerLink="/">Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/">Services</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/">Contact</a>
+            </li>
+          </ul>
         </div>
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" routerLink="/">Home
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/">Services</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/">Contact</a>
-          </li>
-        </ul>
       </div>
+    </nav>
+    <!-- Page Content -->
+    <div class="container">
+      <router-outlet></router-outlet>
     </div>
-  </nav>
+  </div>
 
-  
+    
