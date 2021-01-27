@@ -9,6 +9,9 @@ import org.springframework.data.rest.core.annotation.RestResource;
 
 public interface BookRepository extends JpaRepository<Book, Long> {
 
-	@RestResource(path = "category_id")
+	@RestResource(path = "categoryId")
 	Page<Book> findByCategoryId(@Param("id") Long id, Pageable pageable);
+
+		@RestResource(path = "searchByKeyword")
+	Page<Book> findByNameContaining(@Param("name") String keywork, Pageable pageable);
 }

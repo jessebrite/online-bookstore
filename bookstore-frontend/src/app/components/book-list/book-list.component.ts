@@ -13,11 +13,32 @@ export class BookListComponent implements OnInit {
 
   books: Book[] = [];
   private currentCategoryId = 0;
+  private searchMode = false;
 
   constructor(private bookService: BookService,
               private activatedRoute: ActivatedRoute) { }
 
   public listBooks(): void {
+    this.searchMode = this.activatedRoute.snapshot.paramMap.has('keyword');
+
+    if (this.searchMode) {
+      this.handleSearchBooks();
+    } else {
+      this.handleListBooks();
+    }
+  }
+
+  private handleSearchBooks(): void {
+    // Using '!'. check conditonal in handleListBooks
+    const keyword: string = this.activatedRoute.snapshot.paramMap.get('keyword')!;
+
+    this.bookService.searchBooks(keyword).subscribe(
+      data => { this.books = data },
+      this.handleError
+      )
+  }
+
+  private handleListBooks(): void {
 
     const hasCategoryId: boolean = this.activatedRoute.snapshot.paramMap.has('id');
 
@@ -34,12 +55,7 @@ export class BookListComponent implements OnInit {
       data => { this.books = data; },
       this.handleError
     );
-  }
 
-  ngOnInit(): void {
-    this.activatedRoute.paramMap.subscribe(() => {
-      this.listBooks();
-    });
   }
 
   private handleError(error: any): Observable<any> {
@@ -47,5 +63,11 @@ export class BookListComponent implements OnInit {
     return error(error.message || error);
   }
 
+
+  ngOnInit(): void {
+    this.activatedRoute.paramMap.subscribe(() => {
+      this.listBooks();
+    });
+  }
 
 }

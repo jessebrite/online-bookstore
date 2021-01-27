@@ -9,6 +9,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { BookCategoryComponent } from './components/book-category/book-category.component';
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { BookCategoryComponent } from './components/book-category/book-category.
     PageNotFoundComponent,
     HeaderComponent,
     FooterComponent,
-    BookCategoryComponent
+    BookCategoryComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
