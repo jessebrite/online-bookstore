@@ -17,30 +17,29 @@ export class BookService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public getBooks(categoryId: number): Observable<Book[]> {
+  public getBooksById(categoryId: number): Observable<Book[]> {
     const searchUrl = `${this.apiBaseUrl}/books/search/categoryId?id=${categoryId}`;
     return this.getBooksList(searchUrl);
   }
 
   public getBookCategories(): Observable<BookCategory[]> {
-    const bookCategoryUrl = `${this.apiBaseUrl}//book-categories`;
+    const bookCategoryUrl = `${this.apiBaseUrl}/book-categories`;
     return this.httpClient.get<GetResponseBookCategory>(bookCategoryUrl)
-      .pipe(
-        map(response => response._embedded.bookCategories)
-    );
+      .pipe(map(response => response._embedded.bookCategories));
   }
 
-  public searchBooks(keyword: string): Observable<Book[]> {
+  public searchBooksByKeywork(keyword: string): Observable<Book[]> {
     const searchUrl = `${this.apiBaseUrl}/books/search/searchByKeyword?name=${keyword}`;
-    return this.getBooksList(searchUrl)
+    return this.getBooksList(searchUrl);
+  }
+
+  public getBookDetails(bookId: number): Observable<Book> {
+    const bookDetailsUrl = `${this.apiBaseUrl}/books/${bookId}`;
+    return this.httpClient.get<Book>(bookDetailsUrl);
   }
 
   private getBooksList(searchUrl: string): Observable<Book[]> {
     return this.httpClient.get<GetResponseBook>(searchUrl)
-      .pipe(
-        map(response => response._embedded.books)
-      );
+      .pipe(map(response => response._embedded.books));
   }
-
 }
-

@@ -1,5 +1,5 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
-@import "~font-awesome/css/font-awesome.min.css"
+@import "~@fortawesome/fontawesome-free/css/all.min.css"
 
 @font-face {
 	font-family: 'Roboto Mono';
@@ -25,4 +25,8 @@ body, html {
 .wrapper {
   min-height: 100%;
   position: relative;
+}
+
+a:hover {
+	text-decoration: none;
 }

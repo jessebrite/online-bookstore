@@ -1,0 +1,43 @@
+<!-- Page Content -->
+<div class="container-fluid">
+
+  <div class="row">
+
+    <div class="col-lg-3">
+      <app-book-category></app-book-category>
+    </div>
+
+    <!-- /.col-lg-3 -->
+
+    <div class="col-lg-9">
+
+      <!-- Book content -->
+      <main class="row">
+        <div class="col-12 col-md-4">
+        	<div class="thumbnail"><img src="https://placehold.it/230x300"></div>
+        </div>
+
+        <div class="col-12 col-md-8">
+        	<h3 class="h3">{{book.name}}</h3><hr>
+        	<p>{{book.description}}</p><hr>
+        	<h4 class="h4"><strong>{{book.unitPrice | currency}}</strong></h4><hr>
+        	<h6 class="h6">{{book.unitPrice}}</h6><hr>
+
+        	<a class="btn btn-success">
+        		<i class="fas fa-arrow-left"></i> Back
+        	</a>
+        	<a class="btn btn-secondary ml-1">
+        		<i class="fas fa-cart-arrow-down"></i> Add to cart
+        	</a>
+
+        </div>
+      </main>
+
+    </div>
+    <!-- /.col-lg-9 -->
+
+  </div>
+  <!-- /.row -->
+
+</div>
+<!-- /.container -->

@@ -10,6 +10,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { BookCategoryComponent } from './components/book-category/book-category.component';
 import { SearchComponent } from './components/search/search.component';
+import { BookDetailsComponent } from './components/book-details/book-details.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { SearchComponent } from './components/search/search.component';
     HeaderComponent,
     FooterComponent,
     BookCategoryComponent,
-    SearchComponent
+    SearchComponent,
+    BookDetailsComponent
   ],
   imports: [
     BrowserModule,

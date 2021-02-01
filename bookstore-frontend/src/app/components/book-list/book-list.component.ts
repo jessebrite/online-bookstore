@@ -29,10 +29,10 @@ export class BookListComponent implements OnInit {
   }
 
   private handleSearchBooks(): void {
-    // Using '!'. check conditonal in handleListBooks
+    // Using '!'. check conditonal in handleListBooks method
     const keyword: string = this.activatedRoute.snapshot.paramMap.get('keyword')!;
 
-    this.bookService.searchBooks(keyword).subscribe(
+    this.bookService.searchBooksByKeywork(keyword).subscribe(
       data => { this.books = data },
       this.handleError
       )
@@ -51,7 +51,7 @@ export class BookListComponent implements OnInit {
       this.currentCategoryId = 1;
     }
 
-    this.bookService.getBooks(this.currentCategoryId).subscribe(
+    this.bookService.getBooksById(this.currentCategoryId).subscribe(
       data => { this.books = data; },
       this.handleError
     );
