@@ -13,17 +13,19 @@
 
       <!-- Book content -->
       <main class="row">
-        <div class="col-12 col-md-4">
-        	<div class="thumbnail"><img src="https://placehold.it/230x300"></div>
+        <div class="col-12 col-md-5">
+        	<div class="thumbnail">
+            <img [src]="book.imageUrl" img-responsive height="300" width="250">
+          </div>
         </div>
 
-        <div class="col-12 col-md-8">
+        <div class="col-12 col-md-7">
         	<h3 class="h3">{{book.name}}</h3><hr>
         	<p>{{book.description}}</p><hr>
-        	<h4 class="h4"><strong>{{book.unitPrice | currency}}</strong></h4><hr>
-        	<h6 class="h6">{{book.unitPrice}}</h6><hr>
+        	<h4 class="h4">Price: <strong>{{book.unitPrice | currency}}</strong></h4><hr>
+        	<h6 class="h6">Qty. in stock: <strong>{{book.unitPrice}}</strong></h6><hr>
 
-        	<a class="btn btn-success">
+        	<a class="btn btn-success" (click)="goBack()">
         		<i class="fas fa-arrow-left"></i> Back
         	</a>
         	<a class="btn btn-secondary ml-1">
