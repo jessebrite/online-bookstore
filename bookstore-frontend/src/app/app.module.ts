@@ -25,8 +25,8 @@ import { BookDetailsComponent } from './components/book-details/book-details.com
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { BookService } from 'src/app/services/book.service';
 import { Observable } from 'rxjs';
 import { Book } from '../../common/book';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-book-list',
@@ -33,9 +34,9 @@ export class BookListComponent implements OnInit {
     const keyword: string = this.activatedRoute.snapshot.paramMap.get('keyword')!;
 
     this.bookService.searchBooksByKeywork(keyword).subscribe(
-      data => { this.books = data },
+      data => { this.books = data; },
       this.handleError
-      )
+      );
   }
 
   private handleListBooks(): void {
@@ -55,7 +56,6 @@ export class BookListComponent implements OnInit {
       data => { this.books = data; },
       this.handleError
     );
-
   }
 
   private handleError(error: any): Observable<any> {
@@ -65,9 +65,8 @@ export class BookListComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.activatedRoute.paramMap.subscribe(() => {
-      this.listBooks();
-    });
+    this.activatedRoute.paramMap.subscribe(
+      () => { this.listBooks(); });
   }
 
 }
