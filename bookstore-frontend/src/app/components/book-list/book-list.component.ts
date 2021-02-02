@@ -30,7 +30,7 @@ export class BookListComponent implements OnInit {
   }
 
   private handleSearchBooks(): void {
-    // Using '!'. check conditonal in handleListBooks method
+    // Using '!'. Refer to handleListBooks() method
     const keyword: string = this.activatedRoute.snapshot.paramMap.get('keyword')!;
 
     this.bookService.searchBooksByKeywork(keyword).subscribe(
