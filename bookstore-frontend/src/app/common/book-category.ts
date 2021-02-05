@@ -1,4 +1,4 @@
 export class BookCategory {
-	id = 0;
-	categoryName = '';
+  id = 0;
+  categoryName = '';
 }
