@@ -7,19 +7,22 @@ import { BookService } from 'src/app/services/book.service';
 @Component({
   selector: 'app-book-details',
   templateUrl: './book-details.component.html',
-  styleUrls: ['./book-details.component.css']
+  styleUrls: ['./book-details.component.css'],
 })
 export class BookDetailsComponent implements OnInit {
   book: Book = new Book();
 
-  constructor(private activatedRoute: ActivatedRoute,
-              private bookService: BookService,
-              private location: Location) { }
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private bookService: BookService,
+    private location: Location
+  ) {}
 
-  public getBookInfo() {
+  public bookInfo(): void {
     const id: number = +this.activatedRoute.snapshot.paramMap.get('id')!;
-    this.bookService.getBookDetails(id)
-      .subscribe((data: any) => { this.book = data});
+    this.bookService.getBookDetails(id).subscribe((data: any) => {
+      this.book = data;
+    });
   }
 
   goBack(): void {
@@ -27,9 +30,8 @@ export class BookDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.activatedRoute.paramMap.subscribe(
-      () => { this.getBookInfo(); }
-    );
+    this.activatedRoute.paramMap.subscribe(() => {
+      this.bookInfo();
+    });
   }
-
 }

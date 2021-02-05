@@ -6,23 +6,21 @@ import { BookCategory } from '../../common/book-category';
 @Component({
   selector: 'app-book-category',
   templateUrl: './book-category.component.html',
-  styleUrls: ['./book-category.component.css']
+  styleUrls: ['./book-category.component.css'],
 })
 export class BookCategoryComponent implements OnInit {
-
   bookCategories: BookCategory[] = [];
 
-  constructor(private bookService: BookService) { }
+  constructor(private bookService: BookService) {}
 
   public listBookCategories(): void {
-  	this.bookService.getBookCategories().subscribe(
-  		data => { this.bookCategories = data },
-  		this.handleError
-  	);
+    this.bookService.getBookCategories().subscribe((data) => {
+      this.bookCategories = data;
+    }, this.handleError);
   }
 
   ngOnInit(): void {
-  	this.listBookCategories();
+    this.listBookCategories();
   }
 
   private handleError(error: any): Observable<any> {
