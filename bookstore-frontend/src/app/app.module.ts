@@ -11,6 +11,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { BookCategoryComponent } from './components/book-category/book-category.component';
 import { SearchComponent } from './components/search/search.component';
 import { BookDetailsComponent } from './components/book-details/book-details.component';
+import { JwPaginationModule } from 'jw-angular-pagination';
 
 @NgModule({
   declarations: [
@@ -21,14 +22,15 @@ import { BookDetailsComponent } from './components/book-details/book-details.com
     FooterComponent,
     BookCategoryComponent,
     SearchComponent,
-    BookDetailsComponent
+    BookDetailsComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    JwPaginationModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
