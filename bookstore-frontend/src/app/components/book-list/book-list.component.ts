@@ -31,6 +31,10 @@ export class BookListComponent implements OnInit {
     }
   }
 
+  public pageClick(pageOfItems: Array<Book>): void {
+    this.pageOfItems = pageOfItems;
+  }
+
   private handleSearchBooks(): void {
     // Using '!'. Refer to handleListBooks() method
     const keyword: string = this.activatedRoute.snapshot.paramMap.get(
@@ -61,10 +65,6 @@ export class BookListComponent implements OnInit {
     this.bookService.getBooksById(this.currentCategoryId).subscribe((data) => {
       this.books = data;
     }, this.handleError);
-  }
-
-  public pageClick(pageOfItems: Array<Book>): void {
-    this.pageOfItems = pageOfItems;
   }
 
   private handleError(error: any): Observable<any> {

@@ -32,11 +32,12 @@
         <div *ngIf="!books?.length" class="col-md-12 alert alert-warning">
           No book found
         </div>
-
       </main>
 
 			<!--Pagination-->
-			<jw-pagination [items]="books" (changePage)="pageClick($event)" [pageSize]="pageSize"></jw-pagination>
+			<div class="card-footer">
+				<jw-pagination [items]="books" (changePage)="pageClick($event)" [pageSize]="pageSize"></jw-pagination>
+			</div>
 
     </div>
     <!-- /.col-lg-9 -->
