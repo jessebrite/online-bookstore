@@ -53,7 +53,7 @@ export class BookListComponent implements OnInit {
 
     if (hasCategoryId) {
       // using non-null assertion operator '!'
-      // since 'hasCategocyId' already contains a value
+      // since 'hasCategoryId' certainly contains a value by now,
       // it deals with "Object is possibly 'null'" error
       this.currentCategoryId = +this.activatedRoute.snapshot.paramMap.get(
         'id'
