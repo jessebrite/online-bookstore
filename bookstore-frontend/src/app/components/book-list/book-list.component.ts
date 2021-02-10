@@ -21,6 +21,12 @@ export class BookListComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {}
 
+  ngOnInit(): void {
+    this.activatedRoute.paramMap.subscribe(() => {
+      this.listBooks();
+    });
+  }
+
   public listBooks(): void {
     this.searchMode = this.activatedRoute.snapshot.paramMap.has('keyword');
 
@@ -70,11 +76,5 @@ export class BookListComponent implements OnInit {
   private handleError(error: any): Observable<any> {
     console.error('Something has gone wrong', error);
     return error(error.message || error);
-  }
-
-  ngOnInit(): void {
-    this.activatedRoute.paramMap.subscribe(() => {
-      this.listBooks();
-    });
   }
 }

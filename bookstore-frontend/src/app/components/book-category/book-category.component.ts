@@ -13,14 +13,14 @@ export class BookCategoryComponent implements OnInit {
 
   constructor(private bookService: BookService) {}
 
+  ngOnInit(): void {
+    this.listBookCategories();
+  }
+
   public listBookCategories(): void {
     this.bookService.getBookCategories().subscribe((data) => {
       this.bookCategories = data;
     }, this.handleError);
-  }
-
-  ngOnInit(): void {
-    this.listBookCategories();
   }
 
   private handleError(error: any): Observable<any> {

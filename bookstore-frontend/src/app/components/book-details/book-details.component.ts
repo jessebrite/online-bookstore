@@ -18,6 +18,12 @@ export class BookDetailsComponent implements OnInit {
     private location: Location
   ) {}
 
+  ngOnInit(): void {
+    this.activatedRoute.paramMap.subscribe(() => {
+      this.bookInfo();
+    });
+  }
+
   public bookInfo(): void {
     const id: number = +this.activatedRoute.snapshot.paramMap.get('id')!;
     this.bookService.getBookDetails(id).subscribe((data: any) => {
@@ -25,13 +31,8 @@ export class BookDetailsComponent implements OnInit {
     });
   }
 
-  goBack(): void {
+ public  goBack(): void {
     this.location.back();
   }
 
-  ngOnInit(): void {
-    this.activatedRoute.paramMap.subscribe(() => {
-      this.bookInfo();
-    });
-  }
 }
