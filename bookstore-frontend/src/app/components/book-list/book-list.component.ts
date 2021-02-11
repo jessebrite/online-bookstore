@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
+
 import { BookService } from 'src/app/services/book.service';
 import { Observable } from 'rxjs';
 import { Book } from '../../common/book';
@@ -13,16 +15,20 @@ export class BookListComponent implements OnInit {
   books: Book[] = [];
   private currentCategoryId = 0;
   private searchMode = false;
+  private previousCategory = 1;
 
-  //server-side paging properties
+  // server-side paging properties
   currentPage = 1;
   pageSize = 5;
   totalRecords = 0;
 
   constructor(
     private bookService: BookService,
-    private activatedRoute: ActivatedRoute
-  ) {}
+    private activatedRoute: ActivatedRoute,
+    ngbConfig: NgbPaginationConfig
+  ) {
+    ngbConfig.maxSize = 3;
+  }
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(() => {
@@ -40,9 +46,10 @@ export class BookListComponent implements OnInit {
     }
   }
 
-  //public pageClick(pageOfItems: Array<Book>): void {
-  //this.pageOfItems = pageOfItems;
-  //}
+  public updatePageSize(pageSize: number): void {
+    this.pageSize = pageSize;
+    this.listBooks();
+  }
 
   private handleSearchBooks(): void {
     // Using '!'. Refer to handleListBooks() method
@@ -71,6 +78,12 @@ export class BookListComponent implements OnInit {
       this.currentCategoryId = 1;
     }
 
+    // Set currentPage to 1 if user navigates to a different category
+    if (this.previousCategory !== this.currentCategoryId) {
+      this.currentPage = 1;
+    }
+    this.previousCategory = this.currentCategoryId;
+
     this.bookService
       .getBooksById(this.currentCategoryId, this.currentPage - 1, this.pageSize)
       .subscribe(this.processPaginate(), this.handleError);
@@ -81,7 +94,7 @@ export class BookListComponent implements OnInit {
       this.books = data._embedded.books;
       this.currentPage = data.page.number + 1; // starts from index 1
       this.totalRecords = data.page.totalElements;
-      this.pageSize = data.page.size; 
+      this.pageSize = data.page.size;
     };
   }
 

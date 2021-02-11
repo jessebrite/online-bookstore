@@ -37,12 +37,34 @@
       </main>
 
       <!--Pagination-->
-      <ngb-pagination
-        [(page)]="currentPage"
-        [pageSize]="pageSize"
-        [collectionSize]="totalRecords"
-        (pageChange)="listBooks()"
-      ></ngb-pagination>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-4"><span class="mr-2">Page size:</span></div>
+            <div class="col-md-8">
+              <select
+                (change)="updatePageSize($event.target?.value)"
+                class="form-control-sm"
+                style="width: 22%"
+              >
+                <option selected>5</option>
+                <option>10</option>
+                <option>20</option>
+                <option>50</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <ngb-pagination
+            class="d-flex justify-content-end"
+            [(page)]="currentPage"
+            [pageSize]="pageSize"
+            [collectionSize]="totalRecords"
+            (pageChange)="listBooks()"
+          ></ngb-pagination>
+        </div>
+      </div>
       <!--<div class="card-footer">-->
       <!--<jw-pagination [items]="books" (changePage)="pageClick($event)" [pageSize]="pageSize"></jw-pagination>-->
       <!--</div>-->
