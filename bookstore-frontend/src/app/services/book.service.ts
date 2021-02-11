@@ -17,9 +17,18 @@ export class BookService {
 
   constructor(private httpClient: HttpClient) {}
 
-  public getBooksById(categoryId: number): Observable<Book[]> {
-    const searchUrl = `${this.apiBaseUrl}/books/search/categoryId?id=${categoryId}`;
-    return this.getBooksList(searchUrl);
+  public getBooksById(
+    categoryId: number,
+    currentPage: number,
+    pageSize: number
+  ): Observable<GetResponseBook> {
+    const params: string = [
+      `id=${categoryId}`,
+      `page=${currentPage}`,
+      `size=${pageSize}`,
+    ].join('&');
+    const searchUrl = `${this.apiBaseUrl}/books/search/categoryId?${params}`;
+    return this.httpClient.get<GetResponseBook>(searchUrl);
   }
 
   public getBookCategories(): Observable<BookCategory[]> {

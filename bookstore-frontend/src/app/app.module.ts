@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { NgbPaginationModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -29,6 +30,8 @@ import { JwPaginationModule } from 'jw-angular-pagination';
     HttpClientModule,
     AppRoutingModule,
     JwPaginationModule,
+    NgbPaginationModule,
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -13,8 +13,11 @@ export class BookListComponent implements OnInit {
   books: Book[] = [];
   private currentCategoryId = 0;
   private searchMode = false;
-  public pageOfItems: Array<Book> = [];
-  public pageSize = 6;
+
+  //server-side paging properties
+  currentPage = 1;
+  pageSize = 5;
+  totalRecords = 0;
 
   constructor(
     private bookService: BookService,
@@ -37,9 +40,9 @@ export class BookListComponent implements OnInit {
     }
   }
 
-  public pageClick(pageOfItems: Array<Book>): void {
-    this.pageOfItems = pageOfItems;
-  }
+  //public pageClick(pageOfItems: Array<Book>): void {
+  //this.pageOfItems = pageOfItems;
+  //}
 
   private handleSearchBooks(): void {
     // Using '!'. Refer to handleListBooks() method
@@ -68,9 +71,18 @@ export class BookListComponent implements OnInit {
       this.currentCategoryId = 1;
     }
 
-    this.bookService.getBooksById(this.currentCategoryId).subscribe((data) => {
-      this.books = data;
-    }, this.handleError);
+    this.bookService
+      .getBooksById(this.currentCategoryId, this.currentPage - 1, this.pageSize)
+      .subscribe(this.processPaginate(), this.handleError);
+  }
+
+  private processPaginate(): any {
+    return (data: any) => {
+      this.books = data._embedded.books;
+      this.currentPage = data.page.number + 1; // starts from index 1
+      this.totalRecords = data.page.totalElements;
+      this.pageSize = data.page.size; 
+    };
   }
 
   private handleError(error: any): Observable<any> {
