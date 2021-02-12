@@ -13,6 +13,7 @@ import { BookCategoryComponent } from './components/book-category/book-category.
 import { SearchComponent } from './components/search/search.component';
 import { BookDetailsComponent } from './components/book-details/book-details.component';
 import { JwPaginationModule } from 'jw-angular-pagination';
+import { CartStatusComponent } from './components/cart-status/cart-status.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { JwPaginationModule } from 'jw-angular-pagination';
     BookCategoryComponent,
     SearchComponent,
     BookDetailsComponent,
+    CartStatusComponent,
   ],
   imports: [
     BrowserModule,

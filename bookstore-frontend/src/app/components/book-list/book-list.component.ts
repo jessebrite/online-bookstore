@@ -5,6 +5,8 @@ import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 import { BookService } from 'src/app/services/book.service';
 import { Observable } from 'rxjs';
 import { Book } from '../../common/book';
+import { CartItem } from '../../common/cart-item';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-book-list',
@@ -25,6 +27,7 @@ export class BookListComponent implements OnInit {
   constructor(
     private bookService: BookService,
     private activatedRoute: ActivatedRoute,
+    private cartService: CartService,
     ngbConfig: NgbPaginationConfig
   ) {
     ngbConfig.maxSize = 3;
@@ -49,6 +52,12 @@ export class BookListComponent implements OnInit {
   public updatePageSize(pageSize: number): void {
     this.pageSize = pageSize;
     this.listBooks();
+  }
+
+  public addToCart(book: Book): void {
+    console.log(`book name: ${book.name} price: ${book.unitPrice}`);
+    const cartItem = new CartItem(book);
+    this.cartService.addToCart(cartItem);
   }
 
   private handleSearchBooks(): void {
