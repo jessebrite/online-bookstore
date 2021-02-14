@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+
 import { Book } from 'src/app/common/book';
 import { BookService } from 'src/app/services/book.service';
+import { CartService } from '../../services/cart.service';
+import { CartItem } from '../../common/cart-item';
 
 @Component({
   selector: 'app-book-details',
@@ -15,7 +18,8 @@ export class BookDetailsComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private bookService: BookService,
-    private location: Location
+    private location: Location,
+    private cartService: CartService
   ) {}
 
   ngOnInit(): void {
@@ -31,8 +35,15 @@ export class BookDetailsComponent implements OnInit {
     });
   }
 
- public  goBack(): void {
+  public goBack(): void {
     this.location.back();
   }
 
+  public addToCart(): void {
+    console.log(
+      `book name: ${this.book.name}, and price: ${this.book.unitPrice}`
+    );
+    const cartItem = new CartItem(this.book);
+    this.cartService.addToCart(cartItem);
+  }
 }

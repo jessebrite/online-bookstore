@@ -26,10 +26,10 @@ export class SearchComponent implements OnInit {
   searchBooks(keyword: string): void {
     const search = this.router.navigateByUrl(`/search/${keyword}`);
 
-    fromEvent(this.el.nativeElement, 'keyup')
+    const fireBook = fromEvent(this.el.nativeElement, 'keyup')
       .pipe(
-        map((e: any) => e.target.value),
-        filter((text: string) => text.length > 1),
+        map(($event: any) => $event.target.value),
+        filter((text: string) => text.length > 2),
         debounceTime(250),
         tap(() => this.loading.emit(true)),
         map((query: string) => search)

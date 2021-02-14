@@ -15,7 +15,13 @@ export class CartService {
   public addToCart(theCartItem: CartItem): void {
     // check whether item already in cart
     let alreadyExistsInCart = false;
-    let existingCartItem: CartItem = undefined;
+    let existingCartItem: CartItem = {
+      id: '',
+      imageUrl: '',
+      name: '',
+      unitPrice: 0,
+      quantity: 0,
+    };
 
     // find item in cart based on id
     if (this.cartItems.length > 0) {
