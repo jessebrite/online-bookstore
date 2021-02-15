@@ -30,9 +30,9 @@ export class BookDetailsComponent implements OnInit {
 
   public bookInfo(): void {
     const id: number = +this.activatedRoute.snapshot.paramMap.get('id')!;
-    this.bookService.getBookDetails(id).subscribe((data: any) => {
+    this.bookService.getBookDetails(id).subscribe((data: Book) => {
       this.book = data;
-    });
+    }, this.handleError);
   }
 
   public goBack(): void {
@@ -45,5 +45,10 @@ export class BookDetailsComponent implements OnInit {
     );
     const cartItem = new CartItem(this.book);
     this.cartService.addToCart(cartItem);
+  }
+
+  private handleError(error: any): any {
+    //console.error('Something has gone wrong', error);
+    return error(error.message || error);
   }
 }

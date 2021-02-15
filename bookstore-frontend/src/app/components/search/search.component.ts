@@ -1,5 +1,4 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { fromEvent } from 'rxjs';
 import {
   map,
@@ -7,6 +6,7 @@ import {
   debounceTime,
   distinctUntilChanged,
 } from 'rxjs/operators';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 import { environment } from '../../../environments/environment';
 import { SearchService } from '../../services/search.service';
@@ -26,9 +26,9 @@ export class SearchComponent implements OnInit {
   searchUrl = environment.apiBaseUrl;
 
   constructor(
-    private router: Router,
     private elementRef: ElementRef,
-    private searchService: SearchService
+    private searchService: SearchService,
+    private ngxSpinnerService: NgxSpinnerService
   ) {}
 
   ngOnInit(): void {
@@ -45,12 +45,13 @@ export class SearchComponent implements OnInit {
         distinctUntilChanged() // only fire if next event is diffirent
       )
       .subscribe((data: string) => {
-        this.loading = true;
+        // this.loading = true;
         // console.log(data);
         this.searchService.searchByKeyword(data).subscribe(
           (result: GetResponseBook[]) => {
             // console.log('result: ', result);
-            this.loading = false;
+            // this.loading = false;
+            this.ngxSpinnerService.hide();
             this.results = result;
           },
           (err: any) => {

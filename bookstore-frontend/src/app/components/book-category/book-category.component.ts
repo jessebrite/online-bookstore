@@ -24,7 +24,7 @@ export class BookCategoryComponent implements OnInit {
   }
 
   private handleError(error: any): Observable<any> {
-    console.error('Something has gone wrong', error);
+    //console.error('Something has gone wrong', error);
     return error(error.message || error);
   }
 }

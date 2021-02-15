@@ -1,5 +1,14 @@
 <!-- Page Content -->
 <div class="container-fluid">
+  <ngx-spinner
+    bdColor="rgba(51,51,51,0.8)"
+    size="medium"
+    color="#fff"
+    type="ball-scale-multiple"
+  >
+    <p style="font-size: 20px; color: white">Loading...</p>
+  </ngx-spinner>
+
   <div class="row">
     <div class="col-lg-3">
       <app-book-category></app-book-category>
@@ -42,7 +51,7 @@
       </main>
 
       <!--Pagination-->
-      <div class="row">
+      <div *ngIf="books?.length" class="row">
         <div class="col-md-6">
           <div class="row">
             <div class="col-md-4"><span class="mr-2">Page size:</span></div>
@@ -60,7 +69,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-6">
+        <div *ngIf="books?.length" class="col-md-6">
           <ngb-pagination
             class="d-flex justify-content-end"
             [(page)]="currentPage"
