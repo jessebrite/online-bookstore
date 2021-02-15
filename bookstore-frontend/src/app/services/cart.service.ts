@@ -43,7 +43,7 @@ export class CartService {
   private calculateTotalPrice(): void {
     let totalPriceValue = 0;
     let totalQuantityValue = 0;
-    for (let currentCartItem of this.cartItems) {
+    for (const currentCartItem of this.cartItems) {
       totalPriceValue += currentCartItem.unitPrice * currentCartItem.quantity;
       totalQuantityValue += currentCartItem.quantity;
     }
