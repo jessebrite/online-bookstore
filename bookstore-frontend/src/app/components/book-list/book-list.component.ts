@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, } from '@angular/router';
 import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 
 import { BookService } from 'src/app/services/book.service';
@@ -49,8 +49,8 @@ export class BookListComponent implements OnInit {
     }
   }
 
-  public updatePageSize(pageSize: number): void {
-    this.pageSize = pageSize;
+  public updatePageSize($event: Event): void {
+    this.pageSize = +($event.target as HTMLSelectElement).value;
     this.listBooks();
   }
 
