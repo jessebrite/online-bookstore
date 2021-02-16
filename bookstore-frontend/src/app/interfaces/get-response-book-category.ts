@@ -1,4 +1,4 @@
-import { BookCategory } from '../common/book-category';
+import { BookCategory } from '@common/book-category';
 
 export interface GetResponseBookCategory {
   _embedded: {

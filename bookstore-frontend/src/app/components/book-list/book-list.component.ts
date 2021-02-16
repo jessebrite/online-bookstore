@@ -3,11 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
 
-import { BookService } from 'src/app/services/book.service';
+import { BookService } from '@services/book.service';
 import { Observable } from 'rxjs';
-import { Book } from '../../common/book';
-import { CartItem } from '../../common/cart-item';
-import { CartService } from '../../services/cart.service';
+import { Book } from '@common/book';
+import { CartItem } from '@common/cart-item';
+import { CartService } from '@services/cart.service';
 
 @Component({
   selector: 'app-book-list',
@@ -22,7 +22,7 @@ export class BookListComponent implements OnInit {
 
   // server-side paging properties
   currentPage = 1;
-  pageSize = 5;
+  pageSize = 10;
   totalRecords = 0;
 
   constructor(
@@ -30,7 +30,7 @@ export class BookListComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private cartService: CartService,
     private ngxSpinnerService: NgxSpinnerService,
-    ngbConfig: NgbPaginationConfig
+    private ngbConfig: NgbPaginationConfig
   ) {
     ngbConfig.maxSize = 3;
   }
@@ -58,7 +58,6 @@ export class BookListComponent implements OnInit {
   }
 
   public addToCart(book: Book): void {
-    console.log(`book name: ${book.name} price: ${book.unitPrice}`);
     const cartItem = new CartItem(book);
     this.cartService.addToCart(cartItem);
   }
@@ -103,8 +102,9 @@ export class BookListComponent implements OnInit {
 
   private processPaginate(): any {
     return (data: any) => {
+						console.log('data: ', data)
       this.ngxSpinnerService.hide(); // hide spinner once there's data
-      this.books = data._embedded.books;
+      this.books = data._embedded.books; // assign returned data to books
       this.currentPage = data.page.number + 1; // starts from index 1
       this.totalRecords = data.page.totalElements;
       this.pageSize = data.page.size;
@@ -112,7 +112,7 @@ export class BookListComponent implements OnInit {
   }
 
   private handleError(error: any): Observable<any> {
-    console.error('Something has gone wrong', error);
+    // console.error('Something has gone wrong', error);
     return error(error.message || error);
   }
 }

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { BookService } from 'src/app/services/book.service';
+import { BookService } from '@services/book.service';
 import { Observable } from 'rxjs';
-import { BookCategory } from '../../common/book-category';
+
+import { BookCategory } from '@common/book-category';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-book-category',
@@ -11,7 +13,10 @@ import { BookCategory } from '../../common/book-category';
 export class BookCategoryComponent implements OnInit {
   bookCategories: BookCategory[] = [];
 
-  constructor(private bookService: BookService) {}
+  constructor(
+    private bookService: BookService,
+    private ngxSpinnerService: NgxSpinnerService
+  ) {}
 
   ngOnInit(): void {
     this.listBookCategories();
@@ -19,12 +24,13 @@ export class BookCategoryComponent implements OnInit {
 
   public listBookCategories(): void {
     this.bookService.getBookCategories().subscribe((data) => {
+      this.ngxSpinnerService.hide();
       this.bookCategories = data;
     }, this.handleError);
   }
 
   private handleError(error: any): Observable<any> {
-    //console.error('Something has gone wrong', error);
+    // console.error('Something has gone wrong', error);
     return error(error.message || error);
   }
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { CartItem } from '../common/cart-item';
 import { Subject } from 'rxjs';
+
+import { CartItem } from '@common/cart-item';
 
 @Injectable({
   providedIn: 'root',
@@ -13,18 +14,11 @@ export class CartService {
   constructor() {}
 
   public addToCart(theCartItem: CartItem): void {
-    // check whether item already in cart
     let alreadyExistsInCart = false;
-    let existingCartItem: CartItem = {
-      id: '',
-      imageUrl: '',
-      name: '',
-      unitPrice: 0,
-      quantity: 0,
-    };
+    let existingCartItem = new CartItem();
 
     // find item in cart based on id
-    if (this.cartItems.length > 0) {
+    if (this.cartItems?.length > 0) {
       existingCartItem = this.cartItems.find(
         (data) => theCartItem.id === data.id
       )!;
@@ -47,10 +41,6 @@ export class CartService {
       totalPriceValue += currentCartItem.unitPrice * currentCartItem.quantity;
       totalQuantityValue += currentCartItem.quantity;
     }
-    console.log(
-      `total price: ${totalPriceValue}, total quantity: ${totalQuantityValue}`
-    );
-
     this.totalPrice.next(totalPriceValue);
     this.totalQuantity.next(totalQuantityValue);
   }

@@ -69,7 +69,7 @@
             </div>
           </div>
         </div>
-        <div *ngIf="books?.length" class="col-md-6">
+        <div class="col-md-6">
           <ngb-pagination
             class="d-flex justify-content-end"
             [(page)]="currentPage"
@@ -79,9 +79,6 @@
           ></ngb-pagination>
         </div>
       </div>
-      <!--<div class="card-footer">-->
-      <!--<jw-pagination [items]="books" (changePage)="pageClick($event)" [pageSize]="pageSize"></jw-pagination>-->
-      <!--</div>-->
     </div>
     <!-- /.col-lg-9 -->
   </div>

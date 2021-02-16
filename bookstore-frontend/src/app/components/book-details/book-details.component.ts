@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { Book } from 'src/app/common/book';
-import { BookService } from 'src/app/services/book.service';
-import { CartService } from '../../services/cart.service';
-import { CartItem } from '../../common/cart-item';
+import { Book } from '@app/common/book';
+import { BookService } from '@services/book.service';
+import { CartService } from '@services/cart.service';
+import { CartItem } from '@common/cart-item';
 
 @Component({
   selector: 'app-book-details',
@@ -40,15 +40,11 @@ export class BookDetailsComponent implements OnInit {
   }
 
   public addToCart(): void {
-    console.log(
-      `book name: ${this.book.name}, and price: ${this.book.unitPrice}`
-    );
     const cartItem = new CartItem(this.book);
     this.cartService.addToCart(cartItem);
   }
 
   private handleError(error: any): any {
-    //console.error('Something has gone wrong', error);
     return error(error.message || error);
   }
 }
