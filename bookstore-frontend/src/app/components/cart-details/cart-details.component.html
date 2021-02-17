@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="col-md-3">
+    <app-book-category></app-book-category>
+  </div>
+  <div class="col-md-9">
+    <div class="row">
+      <div class="col-md-12"></div>
+      <table class="table table-bordered">
+        <thead class="bg-dark text-light">
+          <tr>
+            <th width="20%">Book image</th>
+            <th width="50%">Book Details</th>
+            <th width="30%">Price Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of cartItems">
+            <td>
+              <img
+                [src]="item.imageUrl"
+                width="150"
+                height="200"
+                alt="book image"
+                class="img-responsive"
+              />
+            </td>
+            <td>
+              <p class="font-weight-bold">{{ item.name }}</p>
+              <p>{{ item.description }}</p>
+              <p class="font-weight-bold">{{ item.unitPrice | currency }}</p>
+            </td>
+            <td>
+              <div class="row">
+											<div class="col-md-12"><strong>Quantity:</strong> {{ item.quantity }}</div>
+                <div class="col-md-12 mt-2">
+												<strong>Subtotal:</strong> {{ item.unitPrice * item.quantity | currency }}
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2"></td>
+            <td>
+              <p><strong>Total Quantity:</strong> {{ totalQuantity }}</p>
+              <p><strong>Shipping: </strong> Free</p>
+              <p><strong>Total Price:</strong> {{ totalPrice | currency }}</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
