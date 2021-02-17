@@ -15,6 +15,7 @@ import { BookCategoryComponent } from './components/book-category/book-category.
 import { SearchComponent } from './components/search/search.component';
 import { BookDetailsComponent } from './components/book-details/book-details.component';
 import { CartStatusComponent } from './components/cart-status/cart-status.component';
+import { CartDetailsComponent } from './components/cart-details/cart-details.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { CartStatusComponent } from './components/cart-status/cart-status.compon
     SearchComponent,
     BookDetailsComponent,
     CartStatusComponent,
+    CartDetailsComponent,
   ],
   imports: [
     BrowserModule,

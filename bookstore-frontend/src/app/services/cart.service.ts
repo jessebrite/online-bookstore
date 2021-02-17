@@ -34,7 +34,7 @@ export class CartService {
     this.calculateTotalPrice();
   }
 
-  private calculateTotalPrice(): void {
+  public calculateTotalPrice(): void {
     let totalPriceValue = 0;
     let totalQuantityValue = 0;
     for (const currentCartItem of this.cartItems) {
