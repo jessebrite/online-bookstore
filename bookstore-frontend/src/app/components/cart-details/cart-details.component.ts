@@ -30,4 +30,31 @@ export class CartDetailsComponent implements OnInit {
 
     this.cartService.calculateTotalPrice();
   }
+
+  incrementQuantity(cartItem: CartItem): void {
+    cartItem.quantity++;
+    this.cartService.calculateTotalPrice();
+  }
+
+  decrementQuantity(cartItem: CartItem): void {
+    cartItem.quantity > 1 ? cartItem.quantity-- : this.remove(cartItem);
+    this.cartService.calculateTotalPrice();
+  }
+
+  remove(cartItem: CartItem): void {
+    const itemIndex = this.cartItems.findIndex(
+      (tempItem) => tempItem.id === cartItem.id
+    );
+    if (itemIndex > -1) {
+      this.cartItems.splice(itemIndex, 1);
+      this.cartService.calculateTotalPrice();
+    }
+  }
+
+  public clear(): void {
+    if (confirm('are you sure?')) {
+      this.cartItems.splice(0);
+      this.cartService.calculateTotalPrice();
+    }
+  }
 }
