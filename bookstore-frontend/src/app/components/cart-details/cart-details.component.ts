@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { CartItem } from '@common/cart-item';
 import { CartService } from '@services/cart.service';
@@ -13,10 +14,17 @@ export class CartDetailsComponent implements OnInit {
   totalPrice = 0;
   totalQuantity = 0;
 
-  constructor(private cartService: CartService) {}
+  constructor(
+    private cartService: CartService,
+    private ngbModalService: NgbModal
+  ) {}
 
   ngOnInit(): void {
     this.cartDetails();
+  }
+
+  public open(name: TemplateRef<string>): void {
+    this.ngbModalService.open(name);
   }
 
   public cartDetails(): void {
@@ -50,11 +58,8 @@ export class CartDetailsComponent implements OnInit {
       this.cartService.calculateTotalPrice();
     }
   }
-
   public clear(): void {
-    if (confirm('are you sure?')) {
-      this.cartItems.splice(0);
-      this.cartService.calculateTotalPrice();
-    }
+    this.cartItems.splice(0);
+    this.cartService.calculateTotalPrice();
   }
 }

@@ -70,13 +70,33 @@
           </tr>
           <tr>
             <td colspan="2">
-              <button
-                routerLink="/books"
-                class="btn btn-primary"
-              >
-               Go back
+              <button routerLink="/books" class="btn btn-primary">
+                Go back
               </button>
-              <button class="btn btn-secondary ml-1" (click)="clear()">Empty Cart</button>
+              <button class="btn btn-secondary ml-1" (click)="open(content)">
+                Empty Cart
+              </button>
+              <ng-template #content let-modal>
+                <div class="modal-body">
+                  <p class="text-center">Are you sure?</p>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-outline-secondary"
+                    (click)="modal.close()"
+                  >
+                    No
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-outline-danger"
+                    (click)="modal.close(clear())"
+                  >
+                    Yes
+                  </button>
+                </div>
+              </ng-template>
             </td>
             <td>
               <p><strong>Total Quantity:</strong> {{ totalQuantity }}</p>
