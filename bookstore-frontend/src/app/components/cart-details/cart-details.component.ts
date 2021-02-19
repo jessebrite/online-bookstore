@@ -1,4 +1,5 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { CartItem } from '@common/cart-item';
@@ -16,6 +17,7 @@ export class CartDetailsComponent implements OnInit {
 
   constructor(
     private cartService: CartService,
+    private router: Router,
     private ngbModalService: NgbModal
   ) {}
 
@@ -24,12 +26,11 @@ export class CartDetailsComponent implements OnInit {
   }
 
   public open(name: TemplateRef<string>): void {
-    this.ngbModalService.open(name);
+    this.ngbModalService.open(name, { size: 'sm' });
   }
 
   public cartDetails(): void {
     this.cartItems = this.cartService.cartItems;
-
     this.cartService.totalPrice.subscribe((data) => (this.totalPrice = data));
 
     this.cartService.totalQuantity.subscribe(
@@ -37,29 +38,33 @@ export class CartDetailsComponent implements OnInit {
     );
 
     this.cartService.calculateTotalPrice();
+    this.returnHome();
   }
 
-  incrementQuantity(cartItem: CartItem): void {
+  public incrementQuantity(cartItem: CartItem): void {
     cartItem.quantity++;
     this.cartService.calculateTotalPrice();
   }
 
-  decrementQuantity(cartItem: CartItem): void {
+  public decrementQuantity(cartItem: CartItem): void {
     cartItem.quantity > 1 ? cartItem.quantity-- : this.remove(cartItem);
     this.cartService.calculateTotalPrice();
+    this.returnHome();
   }
 
-  remove(cartItem: CartItem): void {
-    const itemIndex = this.cartItems.findIndex(
-      (tempItem) => tempItem.id === cartItem.id
-    );
-    if (itemIndex > -1) {
-      this.cartItems.splice(itemIndex, 1);
-      this.cartService.calculateTotalPrice();
+  public remove(cartItem: CartItem): void {
+    this.cartService.remove(cartItem);
+    this.returnHome();
+  }
+
+  private returnHome(): void {
+    if (this.cartItems.length < 1) {
+      this.router.navigate(['/']);
     }
   }
   public clear(): void {
     this.cartItems.splice(0);
     this.cartService.calculateTotalPrice();
+    this.router.navigate(['/']);
   }
 }
