@@ -68,5 +68,4 @@ export class CartDetailsComponent implements OnInit {
       this.router.navigate(['/']);
     }
   }
-
 }

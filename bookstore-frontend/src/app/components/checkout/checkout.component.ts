@@ -4,7 +4,7 @@ import { NgForm } from '@angular/forms';
 
 import { CheckoutService } from '@services/checkout.service';
 import { Order } from '@common/order';
-import { CartItem } from '@common/cart-item';
+// import { CartItem } from '@common/cart-item';
 import { CartService } from '@services/cart.service';
 
 @Component({
@@ -13,8 +13,12 @@ import { CartService } from '@services/cart.service';
   styleUrls: ['./checkout.component.css'],
 })
 export class CheckoutComponent implements OnInit {
+  formError = '';
   order: Order = new Order();
-  cartItem: CartItem[] = [];
+  // cartItems: CartItem[] = [];
+  cartItems = this.cartService.cartItems;
+  orderSent = false;
+  submitted = false;
 
   constructor(
     private cartService: CartService,
@@ -22,9 +26,26 @@ export class CheckoutComponent implements OnInit {
     private checkoutService: CheckoutService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void { this.returnHome() }
 
   onSubmit(form: NgForm): void {
+    this.submitted = true;
+    if (
+      !this.order?.name ||
+      !this.order?.city ||
+      !this.order?.address ||
+      !this.order?.state ||
+      !this.order?.zip ||
+      !this.order?.country
+    ) {
+      this.formError = 'Please all fields required';
+    } else {
+      this.sendOrder();
+      this.orderSent = true;
+    }
+  }
+
+  private sendOrder(): void {
     this.checkoutService.processOrder(this.order).subscribe((data: Order) => {
       this.order = data;
       this.clear();
@@ -32,8 +53,14 @@ export class CheckoutComponent implements OnInit {
   }
 
   public clear(): void {
-    this.cartItem.splice(0);
+    this.cartItems.splice(0);
     this.cartService.calculateTotalPrice();
     this.router.navigate(['/books']);
+  }
+
+  private returnHome(): void {
+    if (this.cartItems.length < 1) {
+      this.router.navigate(['/']);
+    }
   }
 }

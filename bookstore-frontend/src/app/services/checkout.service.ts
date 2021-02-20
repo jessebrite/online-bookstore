@@ -22,7 +22,7 @@ export class CheckoutService {
   public processOrder(order: Order): Observable<Order> {
     console.log('posted data: ', order);
     return this.httpClient
-      .post<Order>(this.url, JSON.stringify(order), {
+      .post<Order>(this.url, order, {
         headers: this.headers,
       })
       .pipe(
