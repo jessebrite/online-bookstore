@@ -15,10 +15,10 @@ import { CartService } from '@services/cart.service';
 export class CheckoutComponent implements OnInit {
   formError = '';
   order: Order = new Order();
-  // cartItems: CartItem[] = [];
   cartItems = this.cartService.cartItems;
   orderSent = false;
   submitted = false;
+  enabled = false;
 
   constructor(
     private cartService: CartService,
@@ -26,13 +26,17 @@ export class CheckoutComponent implements OnInit {
     private checkoutService: CheckoutService
   ) {}
 
-  ngOnInit(): void { this.returnHome() }
+  ngOnInit(): void {
+    this.returnHome();
+  }
 
   onSubmit(form: NgForm): void {
     this.submitted = true;
+    // If any of the form fields is empty, throw the error msg
     if (
       !this.order?.name ||
       !this.order?.city ||
+      !this.order?.email ||
       !this.order?.address ||
       !this.order?.state ||
       !this.order?.zip ||
@@ -40,8 +44,13 @@ export class CheckoutComponent implements OnInit {
     ) {
       this.formError = 'Please all fields required';
     } else {
+      this.enabled = true;
       this.sendOrder();
       this.orderSent = true;
+      // Flash the 'thank You message for two seconds to the user an redirect home'
+      setTimeout(() => {
+        this.clear();
+      }, 2000);
     }
   }
 
@@ -53,12 +62,15 @@ export class CheckoutComponent implements OnInit {
   }
 
   public clear(): void {
+    // reset cart and redirect user home
+    // should only be called after a successful processing of form
     this.cartItems.splice(0);
     this.cartService.calculateTotalPrice();
     this.router.navigate(['/books']);
   }
 
   private returnHome(): void {
+    // If there's not item in the cart, send user home
     if (this.cartItems.length < 1) {
       this.router.navigate(['/']);
     }
