@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 import { CheckoutService } from '@services/checkout.service';
 import { Order } from '@common/order';
+import { CartItem } from '@common/cart-item';
+import { CartService } from '@services/cart.service';
 
 @Component({
   selector: 'app-checkout',
@@ -11,12 +14,26 @@ import { Order } from '@common/order';
 })
 export class CheckoutComponent implements OnInit {
   order: Order = new Order();
+  cartItem: CartItem[] = [];
 
-  constructor(private checkoutService: CheckoutService) {}
+  constructor(
+    private cartService: CartService,
+    private router: Router,
+    private checkoutService: CheckoutService
+  ) {}
 
   ngOnInit(): void {}
 
-  onSubmit(): void {
-    this.checkoutService.processOrder.subscribe((data: Order) => {this.order = data});
+  onSubmit(form: NgForm): void {
+    this.checkoutService.processOrder(this.order).subscribe((data: Order) => {
+      this.order = data;
+      this.clear();
+    });
+  }
+
+  public clear(): void {
+    this.cartItem.splice(0);
+    this.cartService.calculateTotalPrice();
+    this.router.navigate(['/books']);
   }
 }

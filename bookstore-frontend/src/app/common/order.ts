@@ -1,10 +1,10 @@
 export class Order {
   public id = '';
   public name = '';
-  public address = '';
-  public city = '';
-  public state = '';
-  public zip = '';
-  public country = '';
-  public shipped = false;
+  // public address = '';
+  // public city = '';
+  // public state = '';
+  // public zip = '';
+  // public country = '';
+  // public shipped = false;
 }

@@ -1,16 +1,19 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { BookDetailsComponent } from './components/book-details/book-details.component';
-import { BookListComponent } from './components/book-list/book-list.component';
-import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { CartDetailsComponent } from './components/cart-details/cart-details.component';
+
+import { BookDetailsComponent } from '@components/book-details/book-details.component';
+import { BookListComponent } from '@components/book-list/book-list.component';
+import { PageNotFoundComponent } from '@components/page-not-found/page-not-found.component';
+import { CartDetailsComponent } from '@components/cart-details/cart-details.component';
+import { CheckoutComponent } from '@components/checkout/checkout.component';
 
 const routes: Routes = [
   { path: 'books/:id', component: BookDetailsComponent },
   { path: 'search/:keyword', component: BookListComponent },
-  { path: 'books', component: BookListComponent },
-  { path: 'cart-details', component: CartDetailsComponent },
   { path: 'category/:id', component: BookListComponent },
+  { path: 'cart-details', component: CartDetailsComponent },
+  { path: 'books', component: BookListComponent },
+  { path: 'checkout', component: CheckoutComponent },
   { path: '', redirectTo: 'books', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
 ];
