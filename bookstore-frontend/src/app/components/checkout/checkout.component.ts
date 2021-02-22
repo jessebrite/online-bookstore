@@ -4,7 +4,6 @@ import { NgForm } from '@angular/forms';
 
 import { CheckoutService } from '@services/checkout.service';
 import { Order } from '@common/order';
-// import { CartItem } from '@common/cart-item';
 import { CartService } from '@services/cart.service';
 
 @Component({
@@ -30,11 +29,17 @@ export class CheckoutComponent implements OnInit {
     this.returnHome();
   }
 
+  /**
+   * Gets called when user submits the form
+   *
+   * @param form - ngForm input property
+   */
   onSubmit(form: NgForm): void {
     this.submitted = true;
     // If any of the form fields is empty, throw the error msg
     if (
-      !this.order?.name ||
+      !this.order?.firstname ||
+      !this.order?.lastname ||
       !this.order?.city ||
       !this.order?.email ||
       !this.order?.address ||
@@ -47,13 +52,16 @@ export class CheckoutComponent implements OnInit {
       this.enabled = true;
       this.sendOrder();
       this.orderSent = true;
-      // Flash the 'thank You message for two seconds to the user an redirect home'
+      // Flash the 'thank You' message for two seconds to the user an redirect home
       setTimeout(() => {
         this.clear();
       }, 2000);
     }
   }
 
+  /**
+   * Processes the order
+   */
   private sendOrder(): void {
     this.checkoutService.processOrder(this.order).subscribe((data: Order) => {
       this.order = data;
@@ -61,18 +69,23 @@ export class CheckoutComponent implements OnInit {
     });
   }
 
+  /**
+   * Resets cart and redirect user home
+   * @remarks should only be called after a successful processing of form
+   */
   public clear(): void {
-    // reset cart and redirect user home
-    // should only be called after a successful processing of form
     this.cartItems.splice(0);
     this.cartService.calculateTotalPrice();
     this.router.navigate(['/books']);
   }
 
+  /**
+   * Redirects user home if there's no item in the cart
+   */
   private returnHome(): void {
     // If there's not item in the cart, send user home
     if (this.cartItems.length < 1) {
-      this.router.navigate(['/']);
+      this.router.navigate(['/books']);
     }
   }
 }

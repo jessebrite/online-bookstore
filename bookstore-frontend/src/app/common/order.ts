@@ -1,9 +1,7 @@
-import { Injectable } from '@angular/core';
-
-@Injectable()
 export class Order {
   public id = '';
-  public name = '';
+  public firstname = '';
+  public lastname = '';
   public email = '';
   public address = '';
   public city = '';

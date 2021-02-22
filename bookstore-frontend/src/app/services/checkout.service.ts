@@ -10,15 +10,25 @@ import { environment } from '@environments/environment';
   providedIn: 'root',
 })
 export class CheckoutService {
-  url = `${environment.apiBaseUrl}`;
+  url = `${environment.apiBaseUrl}/books`;
   order: Order = new Order();
 
   headers = new HttpHeaders()
     .set('Content-type', 'application/json')
     .set('Accept', 'application/json');
+  // .set('Access-Control-Allow-Origin', '*'); // Allow CORS
 
   constructor(private httpClient: HttpClient) {}
 
+/**
+ * Processes the order
+ *
+ * @remarks
+ * This is a service method that should be subscribed to
+ *
+ * @param order - must be of type Order
+ * @returns An observable
+ */
   public processOrder(order: Order): Observable<Order> {
     console.log('posted data: ', order);
     return this.httpClient
@@ -31,6 +41,12 @@ export class CheckoutService {
       );
   }
 
+/**
+ * Error handler method that gets called when there's an exception
+ *
+ * @param error - any type of error
+ * @returns - an observable of type error
+ */
   processError(error: any): Observable<any> {
     let message = '';
     if (error.error instanceof ErrorEvent) {
