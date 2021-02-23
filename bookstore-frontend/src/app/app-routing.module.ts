@@ -6,6 +6,8 @@ import { BookListComponent } from '@components/book-list/book-list.component';
 import { PageNotFoundComponent } from '@components/page-not-found/page-not-found.component';
 import { CartDetailsComponent } from '@components/cart-details/cart-details.component';
 import { CheckoutComponent } from '@components/checkout/checkout.component';
+import { RegisterComponent } from '@components/register/register.component';
+import { LoginComponent } from '@components/login/login.component';
 
 const routes: Routes = [
   { path: 'books/:id', component: BookDetailsComponent },
@@ -14,6 +16,8 @@ const routes: Routes = [
   { path: 'cart-details', component: CartDetailsComponent },
   { path: 'books', component: BookListComponent },
   { path: 'checkout', component: CheckoutComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent },
   { path: '', redirectTo: 'books', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
 ];

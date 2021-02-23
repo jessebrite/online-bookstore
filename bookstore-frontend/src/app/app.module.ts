@@ -20,6 +20,7 @@ import { CartDetailsComponent } from './components/cart-details/cart-details.com
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
+import { MustMatchDirective } from './_helpers/must-match.directive';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { LoginComponent } from './components/login/login.component';
     CheckoutComponent,
     RegisterComponent,
     LoginComponent,
+    MustMatchDirective,
   ],
   imports: [
     BrowserModule,
