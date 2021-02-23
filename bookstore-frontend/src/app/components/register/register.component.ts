@@ -14,7 +14,6 @@ export class RegisterComponent implements OnInit {
   user: User = new User();
   userSent = false;
   submitted = false;
-  enabled = false;
 
   constructor() {}
 
@@ -32,8 +31,6 @@ export class RegisterComponent implements OnInit {
     ) {
       this.formError = 'Please all fields required';
     } else {
-      this.enabled = true;
-      // this.sendOrder();
       this.userSent = true;
     }
   }
