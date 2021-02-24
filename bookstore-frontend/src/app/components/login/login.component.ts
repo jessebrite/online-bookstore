@@ -22,8 +22,9 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
     if (!this.user.email || !this.user.password) {
       this.formError = 'Please fill the required fields';
-    } else {
+    } else if (form.valid) {
       this.userSent = true;
+      // this.submitted = false;
     }
   }
 }

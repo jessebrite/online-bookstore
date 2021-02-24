@@ -48,14 +48,15 @@ export class CheckoutComponent implements OnInit {
       !this.order?.country
     ) {
       this.formError = 'Please all fields required';
-    } else {
+    } else if (form.valid) {
       this.enabled = true;
       this.sendOrder();
-      this.orderSent = true;
       // Flash the 'thank You' message for two seconds to the user an redirect home
       setTimeout(() => {
         this.clear();
       }, 2000);
+      this.orderSent = true;
+      this.submitted = false;
     }
   }
 

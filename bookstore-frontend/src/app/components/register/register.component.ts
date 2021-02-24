@@ -30,8 +30,9 @@ export class RegisterComponent implements OnInit {
       !this.user?.confirmPassword
     ) {
       this.formError = 'Please all fields required';
-    } else {
+    } else if (form.valid) {
       this.userSent = true;
+      // this.submitted = false;
     }
   }
 }

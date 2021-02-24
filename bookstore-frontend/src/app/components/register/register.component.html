@@ -1,136 +1,146 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col bg-dark text-white">
-      <a class="navbar-brand">Registration</a>
-      <span
-        ><small
-          >Already a member? Login <a routerLink="/login">here</a></small
-        ></span
+<div class="card m-3">
+  <h5 class="card-header text-center">Registration</h5>
+  <span class="text-center"
+    ><small
+      >Already a member? Login <a routerLink="/login">here</a></small
+    ></span
+  >
+  <div class="card-body">
+    <div
+      *ngIf="formError"
+      class="alert alert-warning alert-dismissible fade show text-center"
+      role="alert"
+    >
+      <!-- <strong>Warning!</strong> -->
+      {{formError}}
+      <button
+        type="button"
+        class="close"
+        data-dismiss="alert"
+        aria-label="Close"
       >
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
+
+    <ng-template #elseTemplate>
+      <div
+        class="alert alert-success alert-dismissible fade show text-center"
+        role="alert"
+      >
+        Success
+        <button
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </ng-template>
+    <form
+      *ngIf="!userSent; else elseTemplate"
+      #form="ngForm"
+      novalidate
+      (ngSubmit)="onSubmit(form)"
+      [appMustMatch]="['password', 'confirmPassword']"
+      class="m-2"
+    >
+      <div class="form-group">
+        <label>First Name</label>
+        <input
+          class="form-control"
+          #firstname="ngModel"
+          name="firstname"
+          [(ngModel)]="user.firstname"
+          [ngClass]="{ 'is-invalid': submitted && firstname.invalid }"
+          required
+        />
+        <span *ngIf="submitted && firstname.invalid" class="text-danger">
+          Please enter your first name
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label>Last Name</label>
+        <input
+          class="form-control"
+          #lastname="ngModel"
+          name="lastname"
+          [(ngModel)]="user.lastname"
+          [ngClass]="{ 'is-invalid': submitted && lastname.invalid }"
+          required
+        />
+        <span *ngIf="submitted && lastname.invalid" class="text-danger">
+          Please enter your last name
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label>Email</label>
+        <input
+          class="form-control"
+          #email="ngModel"
+          name="email"
+          [(ngModel)]="user.email"
+          [ngClass]="{ 'is-invalid': submitted && email.invalid }"
+          required
+          email
+        />
+        <div *ngIf="submitted && email.invalid" class="text-danger">
+          <span *ngIf="email.errors?.required">Please enter your email</span>
+          <span *ngIf="email.errors?.email"
+            >Please provide a valid email address</span
+          >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Password</label>
+        <input
+          class="form-control"
+          #password="ngModel"
+          name="password"
+          type="password"
+          [(ngModel)]="user.password"
+          [ngClass]="{ 'is-invalid': submitted && password.invalid }"
+          required
+          minlength="8"
+        />
+        <div *ngIf="submitted && password.invalid" class="text-danger">
+          <span *ngIf="password.errors?.required"
+            >Please enter your password</span
+          >
+          <span *ngIf="password.errors?.minlength"
+            >Password must be at least 8 chareacters long</span
+          >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Confirm Password</label>
+        <input
+          class="form-control"
+          #confirmPassword="ngModel"
+          name="confirmPassword"
+          type="password"
+          [(ngModel)]="user.confirmPassword"
+          [ngClass]="{ 'is-invalid': submitted && confirmPassword.invalid }"
+          required
+        />
+        <div *ngIf="submitted && confirmPassword.invalid" class="text-danger">
+          <span *ngIf="confirmPassword.errors?.required"
+            >Please confirm your password</span
+          >
+          <span *ngIf="confirmPassword.errors?.mustMatch"
+            >Passwords must match</span
+          >
+        </div>
+      </div>
+      <div class="text-center">
+        <button class="btn btn-secondary m-1" type="submit">Register</button>
+      </div>
+    </form>
   </div>
 </div>
-
-<br />
-
-<div
-  *ngIf="formError"
-  class="alert alert-warning alert-dismissible fade show text-center"
-  role="alert"
->
-  <!-- <strong>Warning!</strong> -->
-  {{formError}}
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-
-<ng-template #elseTemplate>
-  <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
-    Success
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-</ng-template>
-<form
-  *ngIf="!userSent; else elseTemplate"
-  #form="ngForm"
-  novalidate
-  (ngSubmit)="onSubmit(form)"
-  [appMustMatch]="['password', 'confirmPassword']"
-  class="m-2"
->
-  <div class="form-group">
-    <label>First Name</label>
-    <input
-      class="form-control"
-      #firstname="ngModel"
-      name="firstname"
-      [(ngModel)]="user.firstname"
-      [ngClass]="{ 'is-invalid': submitted && firstname.invalid }"
-      required
-    />
-    <span *ngIf="submitted && firstname.invalid" class="text-danger">
-      Please enter your first name
-    </span>
-  </div>
-
-  <div class="form-group">
-    <label>Last Name</label>
-    <input
-      class="form-control"
-      #lastname="ngModel"
-      name="lastname"
-      [(ngModel)]="user.lastname"
-      [ngClass]="{ 'is-invalid': submitted && lastname.invalid }"
-      required
-    />
-    <span *ngIf="submitted && lastname.invalid" class="text-danger">
-      Please enter your last name
-    </span>
-  </div>
-
-  <div class="form-group">
-    <label>Email</label>
-    <input
-      class="form-control"
-      #email="ngModel"
-      name="email"
-      [(ngModel)]="user.email"
-      [ngClass]="{ 'is-invalid': submitted && email.invalid }"
-      required
-      email
-    />
-    <div *ngIf="submitted && email.invalid" class="text-danger">
-      <span *ngIf="email.errors?.required">Please enter your email</span>
-      <span *ngIf="email.errors?.email"
-        >Please provide a valid email address</span
-      >
-    </div>
-  </div>
-
-  <div class="form-group">
-    <label>Password</label>
-    <input
-      class="form-control"
-      #password="ngModel"
-      name="password"
-      type="password"
-      [(ngModel)]="user.password"
-      [ngClass]="{ 'is-invalid': submitted && password.invalid }"
-      required
-      minlength="8"
-    />
-    <div *ngIf="submitted && password.invalid" class="text-danger">
-      <span *ngIf="password.errors?.required">Please enter your password</span>
-      <span *ngIf="password.errors?.minlength"
-        >Password must be at least 8 chareacters long</span
-      >
-    </div>
-  </div>
-
-  <div class="form-group">
-    <label>Confirm Password</label>
-    <input
-      class="form-control"
-      #confirmPassword="ngModel"
-      name="confirmPassword"
-      type="password"
-      [(ngModel)]="user.confirmPassword"
-      [ngClass]="{ 'is-invalid': submitted && confirmPassword.invalid }"
-      required
-    />
-    <div *ngIf="submitted && confirmPassword.invalid" class="text-danger">
-      <span *ngIf="confirmPassword.errors?.required"
-        >Please confirm your password</span
-      >
-      <span *ngIf="confirmPassword.errors?.mustMatch"
-        >Passwords must match</span
-      >
-    </div>
-  </div>
-  <div class="text-center">
-    <button class="btn btn-secondary m-1" type="submit">Register</button>
-  </div>
-</form>
