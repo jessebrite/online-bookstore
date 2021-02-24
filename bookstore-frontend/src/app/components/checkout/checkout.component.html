@@ -1,164 +1,170 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col bg-dark text-white">
-      <a class="navbar-brand">Checkout</a>
+<div class="card m-3">
+  <h5 class="card-header text-center">Checkout</h5>
+  <div class="card-body">
+    <div
+      *ngIf="formError"
+      class="alert alert-warning alert-dismissible fade show"
+      role="alert"
+    >
+      <strong>Warning!</strong> {{formError}}
+      <button
+        type="button"
+        class="close"
+        data-dismiss="alert"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
+
+    <ng-template #elseTemplate>
+      <div class="m-2 text-center">
+        <h2>Thanks!</h2>
+        <p>Thanks for placing your order.</p>
+        <p>We'll ship your goods as soon as possible.</p>
+        <!-- Already redirecting user home after 2 secs. Button kind of unnessesary -->
+        <!-- <button class="btn btn-secondary" routerLink="/books">Return to Store</button> -->
+      </div>
+    </ng-template>
+    <form
+      *ngIf="!orderSent; else elseTemplate"
+      #form="ngForm"
+      novalidate
+      (ngSubmit)="onSubmit(form)"
+      class="m-2"
+    >
+      <div class="form-group">
+        <label>First Name</label>
+        <input
+          class="form-control"
+          #firstname="ngModel"
+          name="firstname"
+          [(ngModel)]="order.firstname"
+          [ngClass]="{ 'is-invalid': submitted && firstname.invalid }"
+          required
+        />
+        <span *ngIf="submitted && firstname.invalid" class="text-danger">
+          Please enter your first name
+        </span>
+      </div>
+      <div class="form-group">
+        <label>Last Name</label>
+        <input
+          class="form-control"
+          #lastname="ngModel"
+          name="lastname"
+          [(ngModel)]="order.lastname"
+          [ngClass]="{ 'is-invalid': submitted && lastname.invalid }"
+          required
+        />
+        <span *ngIf="submitted && lastname.invalid" class="text-danger">
+          Please enter your last name
+        </span>
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input
+          class="form-control"
+          #email="ngModel"
+          name="email"
+          [(ngModel)]="order.email"
+          [ngClass]="{ 'is-invalid': submitted && email.invalid }"
+          email
+          required
+        />
+        <div *ngIf="submitted && email.invalid" class="text-danger">
+          <span *ngIf="email.errors?.required"
+            >Please enter your email address</span
+          >
+          <span *ngIf="email.errors?.email"
+            >Email must be a valid email address</span
+          >
+        </div>
+        <!-- <span *ngIf="submitted && email.invalid" class="text-danger"> -->
+        <!-- Please enter your email address -->
+        <!-- </span> -->
+        <!-- <span *ngIf=""></span> -->
+      </div>
+      <div class="form-group">
+        <label>Address</label>
+        <input
+          class="form-control"
+          #address="ngModel"
+          name="address"
+          [(ngModel)]="order.address"
+          [ngClass]="{ 'is-invalid': submitted && address.invalid }"
+          required
+        />
+        <span *ngIf="submitted && address.invalid" class="text-danger">
+          Please enter your address
+        </span>
+      </div>
+      <div class="form-group">
+        <label>City</label>
+        <input
+          class="form-control"
+          #city="ngModel"
+          name="city"
+          [(ngModel)]="order.city"
+          [ngClass]="{ 'is-invalid': submitted && city.invalid }"
+          required
+        />
+        <span *ngIf="submitted && city.invalid" class="text-danger">
+          Please enter your city
+        </span>
+      </div>
+      <div class="form-group">
+        <label>State</label>
+        <input
+          class="form-control"
+          #state="ngModel"
+          name="state"
+          [(ngModel)]="order.state"
+          [ngClass]="{ 'is-invalid': submitted && state.invalid }"
+          required
+        />
+        <span *ngIf="submitted && state.invalid" class="text-danger">
+          Please enter your state
+        </span>
+      </div>
+      <div class="form-group">
+        <label>Zip/Postal Code</label>
+        <input
+          class="form-control"
+          #zip="ngModel"
+          name="zip"
+          [(ngModel)]="order.zip"
+          required
+          [ngClass]="{ 'is-invalid': submitted && zip.invalid }"
+        />
+        <span *ngIf="submitted && zip.invalid" class="text-danger">
+          Please enter your zip/postal code
+        </span>
+      </div>
+      <div class="form-group">
+        <label>Country</label>
+        <input
+          class="form-control"
+          #country="ngModel"
+          name="country"
+          [(ngModel)]="order.country"
+          [ngClass]="{ 'is-invalid': submitted && country.invalid }"
+          required
+        />
+        <span *ngIf="submitted && country.invalid" class="text-danger">
+          Please enter your country
+        </span>
+      </div>
+      <div class="text-center">
+        <button class="btn btn-primary m-1" type="submit">
+          Complete Order
+        </button>
+        <!-- disabled button until all required fields are filled. Works fine -->
+        <!-- <button  [disabled]="!form.form.valid" class="btn btn-primary m-1" type="submit">Complete Order</button> -->
+        <button class="btn btn-secondary m-1" routerLink="/cart-details">
+          Back
+        </button>
+      </div>
+    </form>
   </div>
 </div>
-
-<br />
-
-<div
-  *ngIf="formError"
-  class="alert alert-warning alert-dismissible fade show"
-  role="alert"
->
-  <strong>Warning!</strong> {{formError}}
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-
-<ng-template #elseTemplate>
-  <div class="m-2 text-center">
-    <h2>Thanks!</h2>
-    <p>Thanks for placing your order.</p>
-    <p>We'll ship your goods as soon as possible.</p>
-    <!-- Already redirecting user home after 2 secs. Button kind of unnessesary -->
-    <!-- <button class="btn btn-secondary" routerLink="/books">Return to Store</button> -->
-  </div>
-</ng-template>
-<form
-  *ngIf="!orderSent; else elseTemplate"
-  #form="ngForm"
-  novalidate
-  (ngSubmit)="onSubmit(form)"
-  class="m-2"
->
-  <div class="form-group">
-    <label>First Name</label>
-    <input
-      class="form-control"
-      #firstname="ngModel"
-      name="firstname"
-      [(ngModel)]="order.firstname"
-			[ngClass]="{ 'is-invalid': submitted && firstname.invalid }"
-      required
-    />
-    <span *ngIf="submitted && firstname.invalid" class="text-danger">
-      Please enter your first name
-    </span>
-  </div>
-  <div class="form-group">
-    <label>Last Name</label>
-    <input
-      class="form-control"
-      #lastname="ngModel"
-      name="lastname"
-      [(ngModel)]="order.lastname"
-			[ngClass]="{ 'is-invalid': submitted && lastname.invalid }"
-      required
-    />
-    <span *ngIf="submitted && lastname.invalid" class="text-danger">
-      Please enter your last name
-    </span>
-  </div>
-  <div class="form-group">
-    <label>Email Address</label>
-    <input
-      class="form-control"
-      #email="ngModel"
-      name="email"
-      [(ngModel)]="order.email"
-			[ngClass]="{ 'is-invalid': submitted && email.invalid }"
-      email
-      required
-    />
-    <div *ngIf="submitted && email.invalid" class="text-danger">
-      <span *ngIf="email.errors?.required">Please enter your email address</span>
-      <span *ngIf="email.errors?.email">Email must be a valid email address</span>
-    </div>
-    <!-- <span *ngIf="submitted && email.invalid" class="text-danger"> -->
-    <!-- Please enter your email address -->
-    <!-- </span> -->
-    <!-- <span *ngIf=""></span> -->
-  </div>
-  <div class="form-group">
-    <label>Address</label>
-    <input
-      class="form-control"
-      #address="ngModel"
-      name="address"
-      [(ngModel)]="order.address"
-			[ngClass]="{ 'is-invalid': submitted && address.invalid }"
-      required
-    />
-    <span *ngIf="submitted && address.invalid" class="text-danger">
-      Please enter your address
-    </span>
-  </div>
-  <div class="form-group">
-    <label>City</label>
-    <input
-      class="form-control"
-      #city="ngModel"
-      name="city"
-      [(ngModel)]="order.city"
-			[ngClass]="{ 'is-invalid': submitted && city.invalid }"
-      required
-    />
-    <span *ngIf="submitted && city.invalid" class="text-danger">
-      Please enter your city
-    </span>
-  </div>
-  <div class="form-group">
-    <label>State</label>
-    <input
-      class="form-control"
-      #state="ngModel"
-      name="state"
-      [(ngModel)]="order.state"
-			[ngClass]="{ 'is-invalid': submitted && state.invalid }"
-      required
-    />
-    <span *ngIf="submitted && state.invalid" class="text-danger">
-      Please enter your state
-    </span>
-  </div>
-  <div class="form-group">
-    <label>Zip/Postal Code</label>
-    <input
-      class="form-control"
-      #zip="ngModel"
-      name="zip"
-      [(ngModel)]="order.zip"
-      required
-			[ngClass]="{ 'is-invalid': submitted && zip.invalid }"
-    />
-    <span *ngIf="submitted && zip.invalid" class="text-danger">
-      Please enter your zip/postal code
-    </span>
-  </div>
-  <div class="form-group">
-    <label>Country</label>
-    <input
-      class="form-control"
-      #country="ngModel"
-      name="country"
-      [(ngModel)]="order.country"
-			[ngClass]="{ 'is-invalid': submitted && country.invalid }"
-      required
-    />
-    <span *ngIf="submitted && country.invalid" class="text-danger">
-      Please enter your country
-    </span>
-  </div>
-  <div class="text-center">
-    <button class="btn btn-primary m-1" type="submit">Complete Order</button>
-    <!-- disabled button until all required fields are filled. Works fine -->
-    <!-- <button  [disabled]="!form.form.valid" class="btn btn-primary m-1" type="submit">Complete Order</button> -->
-    <button class="btn btn-secondary m-1" routerLink="/cart-details">
-      Back
-    </button>
-  </div>
-</form>

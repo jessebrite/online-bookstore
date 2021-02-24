@@ -45,6 +45,11 @@ export class CartService {
     this.totalQuantity.next(totalQuantityValue);
   }
 
+
+  getItemsInCart(): CartItem[] {
+    return this.cartItems;
+  }
+
   public remove(cartItem: CartItem): void {
     const itemIndex = this.cartItems.findIndex(
       (tempItem) => tempItem.id === cartItem.id

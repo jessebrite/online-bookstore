@@ -1,3 +1,5 @@
+import { CartItem } from './cart-item';
+
 export class Order {
   public firstname = '';
   public lastname = '';
@@ -8,4 +10,5 @@ export class Order {
   public zip = '';
   public country = '';
   public shipped = false;
+  cartItems: CartItem[] = [];
 }
