@@ -63,6 +63,10 @@ export class CartDetailsComponent implements OnInit {
     this.router.navigate(['/books']);
   }
 
+  public getItemsInCart(): CartItem[] {
+    return this.cartService.getItemsInCart();
+  }
+
   private returnHome(): void {
     if (this.cartItems.length < 1) {
       this.router.navigate(['/']);

@@ -34,11 +34,12 @@
       class="m-2"
     >
       <div class="form-group">
-        <label>First Name</label>
+        <label for="firstname">First Name</label>
         <input
           class="form-control"
           #firstname="ngModel"
           name="firstname"
+					id="firstname"
           [(ngModel)]="order.firstname"
           [ngClass]="{ 'is-invalid': submitted && firstname.invalid }"
           [ngClass]="{ 'is-valid': submitted && firstname.valid }"
@@ -49,11 +50,12 @@
         </span>
       </div>
       <div class="form-group">
-        <label>Last Name</label>
+        <label for="lastname">Last Name</label>
         <input
           class="form-control"
           #lastname="ngModel"
           name="lastname"
+					id="lastname"
           [(ngModel)]="order.lastname"
           [ngClass]="{ 'is-invalid': submitted && lastname.invalid }"
           [ngClass]="{ 'is-valid': submitted && lastname.valid }"
@@ -64,11 +66,12 @@
         </span>
       </div>
       <div class="form-group">
-        <label>Email Address</label>
+        <label for="email">Email Address</label>
         <input
           class="form-control"
           #email="ngModel"
           name="email"
+					id="email"
           [(ngModel)]="order.email"
           [ngClass]="{ 'is-invalid': submitted && email.invalid }"
           [ngClass]="{ 'is-valid': submitted && email.valid }"
@@ -89,11 +92,12 @@
         <!-- <span *ngIf=""></span> -->
       </div>
       <div class="form-group">
-        <label>Address</label>
+        <label for="address">Address</label>
         <input
           class="form-control"
           #address="ngModel"
           name="address"
+					id="address"
           [(ngModel)]="order.address"
           [ngClass]="{ 'is-invalid': submitted && address.invalid }"
           [ngClass]="{ 'is-valid': submitted && address.valid }"
@@ -104,11 +108,12 @@
         </span>
       </div>
       <div class="form-group">
-        <label>City</label>
+        <label for="city">City</label>
         <input
           class="form-control"
           #city="ngModel"
           name="city"
+					id="city"
           [(ngModel)]="order.city"
           [ngClass]="{ 'is-invalid': submitted && city.invalid }"
           [ngClass]="{ 'is-valid': submitted && city.valid }"
@@ -119,11 +124,12 @@
         </span>
       </div>
       <div class="form-group">
-        <label>State</label>
+        <label for="state">State</label>
         <input
           class="form-control"
           #state="ngModel"
           name="state"
+					id="state"
           [(ngModel)]="order.state"
           [ngClass]="{ 'is-invalid': submitted && state.invalid }"
           [ngClass]="{ 'is-valid': submitted && state.valid }"
@@ -134,14 +140,15 @@
         </span>
       </div>
       <div class="form-group">
-        <label>Zip/Postal Code</label>
+        <label for="zip">Zip/Postal Code</label>
         <input
           class="form-control"
           #zip="ngModel"
           name="zip"
+					id="zip"
           [(ngModel)]="order.zip"
           required
-          [ngClass]="{ 'is-invalid': submitted && zip.nvalid }"
+          [ngClass]="{ 'is-invalid': submitted && zip.invalid }"
           [ngClass]="{ 'is-valid': submitted && zip.valid }"
         />
         <span *ngIf="submitted && zip.invalid" class="text-danger">
@@ -149,11 +156,12 @@
         </span>
       </div>
       <div class="form-group">
-        <label>Country</label>
+        <label for="country">Country</label>
         <input
           class="form-control"
           #country="ngModel"
           name="country"
+					id="country"
           [(ngModel)]="order.country"
           [ngClass]="{ 'is-invalid': submitted && country.invalid }"
           [ngClass]="{ 'is-valid': submitted && country.valid }"

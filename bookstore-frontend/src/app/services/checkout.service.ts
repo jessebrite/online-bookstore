@@ -14,7 +14,7 @@ import { environment } from '@environments/environment';
 export class CheckoutService {
   url = `${environment.apiBaseUrl}/books`;
   order: Order = new Order();
-  // cartItems: CartItem = []
+  // order: Order[] = [];
 
   headers = new HttpHeaders()
     .set('Content-type', 'application/json')
@@ -36,12 +36,6 @@ export class CheckoutService {
    * @returns An observable
    */
   public processOrder(order: Order): Observable<Order> {
-    this.cartService.getItemsInCart().forEach((cartItem: CartItem) => {
-      // console.log('cart: ', cartItem);
-      this.order.cartItems.push(cartItem);
-      console.log('order', order);
-    });
-
     console.log('posted data: ', order);
     return this.httpClient
       .post<Order>(this.url, order, {

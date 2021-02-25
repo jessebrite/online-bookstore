@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 
 import { CheckoutService } from '@services/checkout.service';
 import { Order } from '@common/order';
+import { CartItem } from '@common/cart-item';
 import { CartService } from '@services/cart.service';
 
 @Component({
@@ -13,8 +14,8 @@ import { CartService } from '@services/cart.service';
 })
 export class CheckoutComponent implements OnInit {
   formError = '';
-  order: Order = new Order();
   cartItems = this.cartService.cartItems;
+  order: Order = new Order();
   orderSent = false;
   submitted = false;
   enabled = false;
@@ -64,6 +65,10 @@ export class CheckoutComponent implements OnInit {
    * Processes the order
    */
   private sendOrder(): void {
+    this.cartService?.getItemsInCart()?.forEach((cartItem: CartItem) => {
+      this.order?.cartItem?.push(cartItem);
+    });
+
     this.checkoutService.processOrder(this.order).subscribe((data: Order) => {
       this.order = data;
       this.clear();

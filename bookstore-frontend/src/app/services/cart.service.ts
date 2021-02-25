@@ -46,7 +46,7 @@ export class CartService {
   }
 
 
-  getItemsInCart(): CartItem[] {
+  public getItemsInCart(): CartItem[] {
     return this.cartItems;
   }
 
