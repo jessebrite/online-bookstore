@@ -1,4 +1,4 @@
-<div class="card m-3">
+<div class="card bg-light m-3">
   <h5 class="card-header text-center">Registration</h5>
   <span class="text-center"
     ><small
@@ -55,6 +55,7 @@
           name="firstname"
           [(ngModel)]="user.firstname"
           [ngClass]="{ 'is-invalid': submitted && firstname.invalid }"
+          [ngClass]="{ 'is-valid': submitted && firstname.valid }"
           required
         />
         <span *ngIf="submitted && firstname.invalid" class="text-danger">
@@ -70,6 +71,7 @@
           name="lastname"
           [(ngModel)]="user.lastname"
           [ngClass]="{ 'is-invalid': submitted && lastname.invalid }"
+          [ngClass]="{ 'is-valid': submitted && lastname.valid }"
           required
         />
         <span *ngIf="submitted && lastname.invalid" class="text-danger">
@@ -85,6 +87,7 @@
           name="email"
           [(ngModel)]="user.email"
           [ngClass]="{ 'is-invalid': submitted && email.invalid }"
+          [ngClass]="{ 'is-valid': submitted && email.valid }"
           required
           email
         />
@@ -105,6 +108,7 @@
           type="password"
           [(ngModel)]="user.password"
           [ngClass]="{ 'is-invalid': submitted && password.invalid }"
+          [ngClass]="{ 'is-valid': submitted && password.valid }"
           required
           minlength="8"
         />
@@ -127,6 +131,7 @@
           type="password"
           [(ngModel)]="user.confirmPassword"
           [ngClass]="{ 'is-invalid': submitted && confirmPassword.invalid }"
+          [ngClass]="{ 'is-valid': submitted && confirmPassword.valid }"
           required
         />
         <div *ngIf="submitted && confirmPassword.invalid" class="text-danger">

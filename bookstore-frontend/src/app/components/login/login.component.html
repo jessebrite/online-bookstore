@@ -1,4 +1,4 @@
-<div class="card m-3">
+<div class="card bg-light m-3">
   <h5 class="card-header text-center">Login</h5>
   <span class="text-center"
     ><small
@@ -55,6 +55,7 @@
           name="email"
           [(ngModel)]="user.email"
           [ngClass]="{ 'is-invalid': submitted && email.invalid }"
+          [ngClass]="{ 'is-valid': submitted && email.valid }"
           required
           email
         />
@@ -75,6 +76,7 @@
           type="password"
           [(ngModel)]="user.password"
           [ngClass]="{ 'is-invalid': submitted && password.invalid }"
+          [ngClass]="{ 'is-valid': submitted && password.valid }"
           required
         />
         <div *ngIf="submitted && password.invalid" class="text-danger">
