@@ -4,7 +4,7 @@
       <h5 class="card-header text-center">Login</h5>
       <span class="text-center"
         ><small
-          >Already a member? Register <a routerLink="/register">here</a></small
+          >New here? Register <a routerLink="/register">here</a></small
         ></span
       >
       <div class="card-body">
@@ -89,9 +89,13 @@
               <span *ngIf="password.errors?.required"
                 >Please enter your password</span
               >
+              <div class="text-center">
+                <span
+                  ><small><a routerLink="/#">Forgot password</a></small></span
+                >
+              </div>
             </div>
           </div>
-
           <div class="text-center">
             <button class="btn btn-secondary m-1" type="submit">Login</button>
           </div>
