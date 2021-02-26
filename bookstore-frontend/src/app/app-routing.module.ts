@@ -8,6 +8,8 @@ import { CartDetailsComponent } from '@components/cart-details/cart-details.comp
 import { CheckoutComponent } from '@components/checkout/checkout.component';
 import { RegisterComponent } from '@components/register/register.component';
 import { LoginComponent } from '@components/login/login.component';
+import { AboutComponent } from '@components/about/about.component';
+import { ContactComponent } from '@components/contact/contact.component';
 
 const routes: Routes = [
   { path: 'books/:id', component: BookDetailsComponent },
@@ -18,6 +20,8 @@ const routes: Routes = [
   { path: 'checkout', component: CheckoutComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'contact', component: ContactComponent },
   { path: '', redirectTo: 'books', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
 ];

@@ -4,8 +4,6 @@ import { catchError, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Order } from '@common/order';
-import { CartItem } from '@common/cart-item';
-import { CartService } from '@services/cart.service';
 import { environment } from '@environments/environment';
 
 @Injectable({
@@ -22,7 +20,6 @@ export class CheckoutService {
   // .set('Access-Control-Allow-Origin', '*'); // Allow CORS
 
   constructor(
-    private cartService: CartService,
     private httpClient: HttpClient
   ) {}
 
@@ -36,7 +33,7 @@ export class CheckoutService {
    * @returns An observable
    */
   public processOrder(order: Order): Observable<Order> {
-    console.log('posted data: ', order);
+    console.log('order: ', order);
     return this.httpClient
       .post<Order>(this.url, order, {
         headers: this.headers,
