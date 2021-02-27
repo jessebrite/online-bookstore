@@ -47,13 +47,13 @@ export class CartDetailsComponent implements OnInit {
   }
 
   public decrementQuantity(cartItem: CartItem): void {
-    cartItem.quantity > 1 ? cartItem.quantity-- : this.remove(cartItem);
+    cartItem.quantity > 1 ? cartItem.quantity-- : this.removeCartItem(cartItem);
     this.cartService.calculateTotalPrice();
     this.returnHome();
   }
 
-  public remove(cartItem: CartItem): void {
-    this.cartService.remove(cartItem);
+  public removeCartItem(cartItem: CartItem): void {
+    this.cartService.deleteCartItem(cartItem);
     this.returnHome();
   }
 

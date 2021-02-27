@@ -50,7 +50,7 @@ export class CartService {
     return this.cartItems;
   }
 
-  public remove(cartItem: CartItem): void {
+  public deleteCartItem(cartItem: CartItem): void {
     const itemIndex = this.cartItems.findIndex(
       (tempItem) => tempItem.id === cartItem.id
     );

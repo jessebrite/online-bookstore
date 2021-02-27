@@ -65,8 +65,8 @@ export class CheckoutComponent implements OnInit {
    * Processes the order
    */
   private sendOrder(): void {
-    this.cartService?.getItemsInCart()?.forEach((cartItem: CartItem) => {
-      this.order?.cartItem?.push(cartItem);
+    this.cartService.getItemsInCart()?.forEach((cartItem: CartItem) => {
+      this.order.cartItem?.push(cartItem);
     });
 
     this.checkoutService.processOrder(this.order).subscribe((data: Order) => {
