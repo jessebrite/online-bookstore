@@ -18,7 +18,7 @@ export class CheckoutComponent implements OnInit {
   order: Order = new Order();
   orderSent = false;
   submitted = false;
-  enabled = false;
+  // isEnabled = false;
 
   constructor(
     private cartService: CartService,
@@ -50,7 +50,7 @@ export class CheckoutComponent implements OnInit {
     ) {
       this.formError = 'Please all fields required';
     } else if (form.valid) {
-      this.enabled = true;
+      // this.isEnabled = true;
       this.sendOrder();
       // Flash the 'thank You' message for two seconds to the user an redirect home
       setTimeout(() => {
