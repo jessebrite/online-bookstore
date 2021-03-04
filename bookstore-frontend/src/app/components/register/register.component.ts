@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { User } from '@common/user';
+import { AuthenticationService } from '@services/authentication.service';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +16,7 @@ export class RegisterComponent implements OnInit {
   userSent = false;
   submitted = false;
 
-  constructor() {}
+  constructor(private authenticationService: AuthenticationService) {}
 
   ngOnInit(): void {}
 
@@ -32,7 +33,15 @@ export class RegisterComponent implements OnInit {
       this.formError = 'Please all fields required';
     } else if (form.valid) {
       this.userSent = true;
+      this.doRegistration(this.user);
       // this.submitted = false;
     }
+  }
+  public doRegistration(user: User): void {
+    this.authenticationService
+      .processAuthentication(user)
+      .subscribe((data: User) => {
+        console.log('data: ', data), (this.user = data);
+      });
   }
 }
