@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Order } from '@common/order';
 import { environment } from '@environments/environment';
+import { ProcessErrorService } from '@services/process-error.service';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +21,8 @@ export class CheckoutService {
   // .set('Access-Control-Allow-Origin', '*'); // Allow CORS
 
   constructor(
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private processErrorService: ProcessErrorService
   ) {}
 
   /**
@@ -40,7 +42,7 @@ export class CheckoutService {
       })
       .pipe(
         tap((results: Order) => console.log('results: ', results)),
-        catchError(this.processOrder)
+        catchError(this.processErrorService.processError)
       );
   }
 
@@ -50,14 +52,4 @@ export class CheckoutService {
    * @param error - any type of error
    * @returns - an observable of type error
    */
-  processError(error: any): Observable<any> {
-    let message = '';
-    if (error.error instanceof ErrorEvent) {
-      message = error.error.message;
-    } else {
-      message = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
-    console.log(message);
-    return throwError(message);
-  }
 }
