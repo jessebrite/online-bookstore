@@ -1,4 +1,4 @@
-package com.onus.onlinebookstore.config;
+package com.onus.onlinebookstore.services;
 
 import com.onus.onlinebookstore.entity.User;
 import com.onus.onlinebookstore.repository.UserRepository;
