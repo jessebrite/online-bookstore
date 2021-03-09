@@ -10,8 +10,14 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update
+abj:
+  app:
+    jwtSecret: abjSecretKey
+    jwtExpirationMs: 86400000
 
-#API endpoints
+  #API endpoints
   data:
     rest:
       base-path: /api/v1

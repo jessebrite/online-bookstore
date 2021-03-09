@@ -1,6 +1,9 @@
 package com.onus.onlinebookstore.utils;
 
 import com.onus.onlinebookstore.services.UserDetailsServiceImplementation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,13 +18,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class AuthTokenFilter extends OncePerRequestFilter {
-	private final JwtUtils jwtUtils;
-	private final UserDetailsServiceImplementation userDetailsService;
+	@Autowired
+	private JwtUtils jwtUtils;
 
-	public AuthTokenFilter(JwtUtils jwtUtils, UserDetailsServiceImplementation userDetailsService) {
-		this.jwtUtils = jwtUtils;
-		this.userDetailsService = userDetailsService;
-	}
+	@Autowired
+	private UserDetailsServiceImplementation userDetailsService;
+
+	private static final Logger logger = LoggerFactory.getLogger(AuthTokenFilter.class);
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
