@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/v1/auth")
 public class AuthController {
 	AuthenticationManager authenticationManager;
 	UserRepository userRepository;
@@ -83,7 +83,7 @@ public class AuthController {
 				.body(new MessageResponse("Error: Email is already in use!"));
 		}
 
-		User user = new User(register.getUsername(), register.getEmail(),
+		User user = new User(register.getFirstname(), register.getLastname(), register.getUsername(), register.getEmail(),
 			passwordEncoder.encode(register.getPassword()));
 
 		Set<String> strRole = register.getRole();

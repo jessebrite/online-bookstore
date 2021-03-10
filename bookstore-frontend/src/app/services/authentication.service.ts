@@ -11,7 +11,7 @@ import { environment } from '@environments/environment';
   providedIn: 'root',
 })
 export class AuthenticationService {
-  url = `${environment.apiBaseUrl}/users`;
+  url = `${environment.apiBaseUrl}/auth/`;
   user = new User();
 
   headers = new HttpHeaders()
@@ -23,10 +23,10 @@ export class AuthenticationService {
     private processErrorService: ProcessErrorService
   ) {}
 
-  public processAuthentication(user: User): Observable<User> {
+  public processAuthentication(user: User, url?: string): Observable<User> {
     console.log('user: ', user);
     return this.httpClient
-      .post<User>(this.url, user, {
+      .post<User>(this.url + url, user, {
         headers: this.headers,
       })
       .pipe(

@@ -15,6 +15,7 @@ export class RegisterComponent implements OnInit {
   user: User = new User();
   userSent = false;
   submitted = false;
+  url = 'register';
 
   constructor(private authenticationService: AuthenticationService) {}
 
@@ -26,6 +27,7 @@ export class RegisterComponent implements OnInit {
     if (
       !this.user?.firstname ||
       !this.user?.lastname ||
+      !this.user?.username ||
       !this.user?.email ||
       !this.user?.password ||
       !this.user?.confirmPassword
@@ -33,13 +35,13 @@ export class RegisterComponent implements OnInit {
       this.formError = 'Please all fields required';
     } else if (form.valid) {
       this.userSent = true;
-      this.doRegistration(this.user);
+      this.doRegistration(this.user, this.url);
       // this.submitted = false;
     }
   }
-  public doRegistration(user: User): void {
+  public doRegistration(user: User, url: string): void {
     this.authenticationService
-      .processAuthentication(user)
+      .processAuthentication(user, url)
       .subscribe((data: User) => {
         console.log('data: ', data), (this.user = data);
       });
