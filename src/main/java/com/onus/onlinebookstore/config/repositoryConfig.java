@@ -1,6 +1,5 @@
 package com.onus.onlinebookstore.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
@@ -12,8 +11,11 @@ import javax.persistence.metamodel.Type;
 @Configuration
 public class repositoryConfig implements RepositoryRestConfigurer {
 
-	@Autowired
-	private EntityManager entityManager;
+	private final EntityManager entityManager;
+
+	public repositoryConfig(EntityManager entityManager) {
+		this.entityManager = entityManager;
+	}
 
 	@Override
 	public void configureRepositoryRestConfiguration(

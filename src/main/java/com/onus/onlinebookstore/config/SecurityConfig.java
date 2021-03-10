@@ -3,7 +3,6 @@ package com.onus.onlinebookstore.config;
 import com.onus.onlinebookstore.services.UserDetailsServiceImplementation;
 import com.onus.onlinebookstore.utils.AuthEntryPointJwt;
 import com.onus.onlinebookstore.utils.AuthTokenFilter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -29,11 +28,14 @@ import javax.annotation.Resource;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Resource(name = "userDetailsServiceImplementation")
-	@Autowired
-	private UserDetailsServiceImplementation userDetailsService;
+	private final UserDetailsServiceImplementation userDetailsService;
+	private final AuthEntryPointJwt unauthorizedHandler;
 
-	@Autowired
-	private AuthEntryPointJwt unauthorizedHandler;
+	public SecurityConfig(UserDetailsServiceImplementation userDetailsService,
+	                      AuthEntryPointJwt unauthorizedHandler) {
+		this.userDetailsService = userDetailsService;
+		this.unauthorizedHandler = unauthorizedHandler;
+	}
 
 	@Bean
 	public AuthTokenFilter authenticationJwtTokenFilter() {

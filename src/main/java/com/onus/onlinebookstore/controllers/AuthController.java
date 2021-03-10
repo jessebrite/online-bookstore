@@ -11,7 +11,6 @@ import com.onus.onlinebookstore.repository.RoleRepository;
 import com.onus.onlinebookstore.repository.UserRepository;
 import com.onus.onlinebookstore.services.UserDetailsImplementation;
 import com.onus.onlinebookstore.utils.JwtUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -31,20 +30,25 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
-	@Autowired
 	AuthenticationManager authenticationManager;
-
-	@Autowired
 	UserRepository userRepository;
-
-	@Autowired
 	RoleRepository roleRepository;
-
-	@Autowired
 	PasswordEncoder passwordEncoder;
-
-	@Autowired
 	JwtUtils jwtUtils;
+
+	public AuthController(
+		AuthenticationManager authenticationManager,
+		UserRepository userRepository,
+		RoleRepository roleRepository,
+		PasswordEncoder passwordEncoder,
+		JwtUtils jwtUtils
+	) {
+		this.authenticationManager = authenticationManager;
+		this.userRepository = userRepository;
+		this.roleRepository = roleRepository;
+		this.passwordEncoder = passwordEncoder;
+		this.jwtUtils = jwtUtils;
+	}
 
 	@PostMapping("login")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
