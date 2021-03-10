@@ -4,7 +4,6 @@ import com.onus.onlinebookstore.services.UserDetailsServiceImplementation;
 import com.onus.onlinebookstore.utils.AuthEntryPointJwt;
 import com.onus.onlinebookstore.utils.AuthTokenFilter;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -15,10 +14,11 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
 
 import javax.annotation.Resource;
 
-@Configuration
+//@Configuration // not needed if using @ENableWebSecurity
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(
 	// securedEnabled = true,
@@ -51,20 +51,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
-			.cors().and().csrf().disable()
-			.exceptionHandling().authenticationEntryPoint(unauthorizedHandler)
+			.cors()
+				.configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues())
+			.and().csrf().disable()
+			.exceptionHandling()
+				.authenticationEntryPoint(unauthorizedHandler)
 			.and()
-			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+				.sessionManagement()
+					.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 			.and()
-			.authorizeRequests()
-			.antMatchers("/swagger-ui.html").permitAll()
-			.antMatchers("/books").permitAll()
-			.antMatchers("/auth/**").permitAll()
-			.antMatchers("/test/**").permitAll()
-			.anyRequest().authenticated();
-
-		http.addFilterBefore(
-			authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+				.authorizeRequests()
+//					.antMatchers("/swagger-ui.html").permitAll()
+					.antMatchers("/", "/**").permitAll()
+					.antMatchers("/auth/**").permitAll()
+					.antMatchers("/test/**").permitAll()
+				.anyRequest()
+					.authenticated()
+			.and()
+				.addFilterBefore(
+					authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 	}
 
 	@Bean

@@ -6,5 +6,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 //change path from bookCategories to book-categories
 @RepositoryRestResource(path = "book-categories")
+//@CrossOrigin(origins = "*", maxAge = 3600)
 public interface BookCategoryRepository extends JpaRepository<BookCategory, Long> {
 }

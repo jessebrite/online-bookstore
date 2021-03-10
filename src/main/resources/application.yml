@@ -13,15 +13,16 @@ spring:
         dialect: org.hibernate.dialect.MySQL8Dialect
     hibernate:
       ddl-auto: update
-abj:
-  app:
-    jwtSecret: abjSecretKey
-    jwtExpirationMs: 86400000
 
   #API endpoints
   data:
     rest:
       base-path: /api/v1
+
+abj:
+  app:
+    jwtSecret: abjSecretKey
+    jwtExpirationMs: 86400000
 
 #path for Swagger-UI docs
 springdoc:

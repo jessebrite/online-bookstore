@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RestResource;
 
+//@CrossOrigin(origins = "*", maxAge = 3600)
 public interface BookRepository extends JpaRepository<Book, Long> {
 
 	@RestResource(path = "categoryId")
