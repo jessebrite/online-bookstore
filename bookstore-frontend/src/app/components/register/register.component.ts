@@ -16,7 +16,6 @@ export class RegisterComponent implements OnInit {
   userSent = false;
   submitted = false;
   url = 'register';
-  message = '';
 
   constructor(private authenticationService: AuthenticationService) {}
 
@@ -44,7 +43,7 @@ export class RegisterComponent implements OnInit {
     this.authenticationService
       .processAuthentication(user, url)
       .subscribe((data: User) => {
-        console.log('data: ', data), (this.message = data.message);
+        console.log('data: ', data), (this.user = data);
       });
   }
 }
