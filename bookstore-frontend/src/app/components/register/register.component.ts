@@ -16,7 +16,8 @@ export class RegisterComponent implements OnInit {
   userSent = false;
   submitted = false;
   url = 'register';
-  message = '';
+  successMessage = '';
+  errorMessage = '';
 
   constructor(private authenticationService: AuthenticationService) {}
 
@@ -35,7 +36,6 @@ export class RegisterComponent implements OnInit {
     ) {
       this.formError = 'Please all fields required';
     } else if (form.valid) {
-      this.userSent = true;
       this.doRegistration(this.user, this.url);
       // this.submitted = false;
     }
@@ -44,11 +44,14 @@ export class RegisterComponent implements OnInit {
     this.authenticationService.processAuthentication(user, url).subscribe(
       (data: User) => {
         console.log('data: ', data), (this.user = data);
-        this.message = data.message;
+        this.successMessage = data.message;
+        if (this.successMessage.length > 0) {
+          this.userSent = true;
+        }
       },
       (error) => {
         console.log('error: ', error);
-        this.message = error;
+        this.errorMessage = error;
       }
     );
   }
