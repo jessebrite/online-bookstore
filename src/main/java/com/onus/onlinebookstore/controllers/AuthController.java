@@ -101,7 +101,7 @@ public class AuthController {
 		if (userRepository.existsByUsername(register.getUsername())) {
 			return ResponseEntity
 				.badRequest()
-				.body(new MessageResponse("Username is already exists!"));
+				.body(new MessageResponse("Username already exists!"));
 		}
 		if (userRepository.existsByEmail(register.getEmail())) {
 			return ResponseEntity.badRequest()

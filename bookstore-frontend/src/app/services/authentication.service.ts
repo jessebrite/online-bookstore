@@ -24,13 +24,16 @@ export class AuthenticationService {
   ) {}
 
   public processAuthentication(user: User, url?: string): Observable<User> {
-    console.log('user: ', user);
+    // console.log('user: ', user);
     return this.httpClient
       .post<User>(this.url + url, user, {
         headers: this.headers,
       })
       .pipe(
-        tap((results: User) => console.log('results: ', results)),
+        tap((results: User) => {
+          // captured results and do nothing. There're side effects
+          this.user = results;
+        }),
         catchError(this.processErrorService.processError)
       );
   }

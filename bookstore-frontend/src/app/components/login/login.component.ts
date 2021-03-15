@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   userSent = false;
   url = 'login';
   message = '';
-  noErrors = false;
+  wrongCredentials = false;
 
   constructor(
     private router: Router,
@@ -33,11 +33,8 @@ export class LoginComponent implements OnInit {
     if (!this.user.username || !this.user.password) {
       this.formError = 'Please fill the required fields';
     } else if (form.valid) {
-      // do {
       this.doLogin(this.user, this.url);
       this.userSent = true;
-      // } while (this.noErrors === true);
-      // this.submitted = false;
     }
   }
 
@@ -45,9 +42,14 @@ export class LoginComponent implements OnInit {
     this.authenticationService
       .processAuthentication(user, url)
       .subscribe((data: User) => {
-        this.tokenService.saveToken(data.token);
-        this.tokenService.saveUser(data);
-        this.router.navigate(['/']);
+        if (!data.token) {
+          this.message = data.message;
+          this.wrongCredentials = true;
+        } else {
+          this.tokenService.saveToken(data.token);
+          this.tokenService.saveUser(data);
+          this.router.navigate(['/']);
+        }
       });
   }
 

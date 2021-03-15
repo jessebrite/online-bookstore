@@ -25,9 +25,8 @@
           </button>
         </div>
 
-        <ng-template #elseTemplate>
-          <div
-            class="alert alert-success alert-dismissible fade show text-center"
+          <div *ngIf="message !== ''"
+            class="alert alert-danger alert-dismissible fade show text-center"
             role="alert"
           >
 					{{message}}
@@ -40,9 +39,7 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-        </ng-template>
         <form
-          *ngIf="!userSent; else elseTemplate"
           #form="ngForm"
           novalidate
           (ngSubmit)="onSubmit(form)"

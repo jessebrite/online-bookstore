@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { User } from '@common/user';
 import { AuthenticationService } from '@services/authentication.service';
@@ -19,7 +20,10 @@ export class RegisterComponent implements OnInit {
   successMessage = '';
   errorMessage = '';
 
-  constructor(private authenticationService: AuthenticationService) {}
+  constructor(
+    private router: Router,
+    private authenticationService: AuthenticationService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -47,6 +51,9 @@ export class RegisterComponent implements OnInit {
         this.successMessage = data.message;
         if (this.successMessage.length > 0) {
           this.userSent = true;
+          setTimeout(() => {
+            this.router.navigate(['/login']);
+          }, 1000);
         }
       },
       (error) => {

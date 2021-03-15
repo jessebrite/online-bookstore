@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 
 import { CheckoutService } from '@services/checkout.service';
 import { Order } from '@common/order';
+import { User } from '@common/user';
 import { CartItem } from '@common/cart-item';
 import { CartService } from '@services/cart.service';
 
@@ -15,6 +16,7 @@ import { CartService } from '@services/cart.service';
 export class CheckoutComponent implements OnInit {
   formError = '';
   cartItems = this.cartService.cartItems;
+	// user: User 
   order: Order = new Order();
   orderSent = false;
   submitted = false;
