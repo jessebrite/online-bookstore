@@ -25,15 +25,16 @@ public class User {
 	private Long id;
 
 	@NotBlank
-	@Size(max = 25)
+	@Size(max = 25, message = "First name should not be more than 25 characters")
 	private String firstname;
 
 	@NotBlank
-	@Size(max = 45)
+	@Size(max = 45, message = "Last name should not be more than 45 characters")
 	private String lastname;
 
 	@NotBlank
-	@Size(max = 25)
+	@Size(max = 25, message = "First name must not be more thant 25 characters long")
+	@Size(min = 3, message = "Username must be at least 3 characters long")
 	private String username;
 
 	@NotBlank
