@@ -96,7 +96,7 @@ public class AuthController {
 			List<String> errors = result.getAllErrors().stream()
 				.map(DefaultMessageSourceResolvable::getDefaultMessage)
 				.collect(Collectors.toList());
-			return new ResponseEntity<>(errors, HttpStatus.NOT_ACCEPTABLE);
+			return new ResponseEntity<>(errors, HttpStatus.OK);
 		}
 		if (userRepository.existsByUsername(register.getUsername())) {
 			return ResponseEntity

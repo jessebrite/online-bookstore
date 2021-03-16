@@ -11,14 +11,14 @@ import java.util.Set;
 @Data
 public class RegisterRequest {
 	@NotBlank(message = "First name is required")
-	@Size(max = 25, message = "First name should not exceed 35 characters")
+	@Size(max = 25, message = "First name should not exceed 25 characters")
 	private String firstname;
 
 	@NotBlank(message = "Last name is required")
 	@Size(max = 45, message = "Last name should not exceed 35 characters")
 	private String lastname;
 
-	@NotBlank(message = "username is required")
+	@NotBlank(message = "Username is required")
 	@Size(min = 3, max = 20, message = "Username must be between 3 and 20 characters")
 	private String username;
 
@@ -27,7 +27,7 @@ public class RegisterRequest {
 	@Email(message = "Please provide a valid email address")
 	private String email;
 
-	@NotBlank
+	@NotBlank(message = "Password id required")
 	@Size(min = 8, message = "Password must be at least 8 characters long")
 	private String password;
 
