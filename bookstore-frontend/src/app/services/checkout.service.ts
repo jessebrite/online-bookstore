@@ -12,7 +12,7 @@ import { ProcessErrorService } from '@services/process-error.service';
 })
 export class CheckoutService {
   url = `${environment.apiBaseUrl}/books`;
-  order: Order = new Order();
+  // order: Order = new Order();
   // order: Order[] = [];
 
   headers = new HttpHeaders()
