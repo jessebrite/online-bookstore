@@ -14,12 +14,9 @@ export class Order {
   public shipped = false;
   cartItem: CartItem[] = [];
 
-  constructor(private tokenService?: TokenStorageService) {
-    const user = tokenService?.getCurrentUser();
-    console.log('user: ', user);
-    this.firstname = user?.firstname || '';
-    this.lastname = 'golden';
-    // this.lastname = user?.username || '';
-    this.email = user?.email || '';
+  constructor() {
+    // this.firstname = user?.firstname || '';
+    // this.lastname = 'golden';
+    // this.email = user?.email || '';
   }
 }

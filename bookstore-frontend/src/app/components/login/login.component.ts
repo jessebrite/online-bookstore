@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   url = 'login';
   message = '';
   wrongCredentials = false;
+	returnUrl = ''
 
   constructor(
     private router: Router,

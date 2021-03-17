@@ -6,6 +6,7 @@ import { CheckoutService } from '@services/checkout.service';
 import { Order } from '@common/order';
 import { CartItem } from '@common/cart-item';
 import { CartService } from '@services/cart.service';
+import { TokenStorageService } from '@services/token-storage.service';
 
 @Component({
   selector: 'app-checkout',
@@ -21,12 +22,17 @@ export class CheckoutComponent implements OnInit {
   // isEnabled = false;
 
   constructor(
+    private tokenService: TokenStorageService,
     private cartService: CartService,
     private router: Router,
     private checkoutService: CheckoutService
   ) {}
 
   ngOnInit(): void {
+    const user = this.tokenService.getCurrentUser();
+    this.order.lastname = user.lastname;
+    this.order.firstname = user.firstname;
+    this.order.email = user.email;
     this.returnHome();
   }
 
