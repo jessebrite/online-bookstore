@@ -29,9 +29,11 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
-          <app-search></app-search>
+          <div *ngIf="!isAdmin">
+            <app-search></app-search>
+          </div>
 
-          <div class="ml-auto">
+          <div *ngIf="!isAdmin" class="ml-auto">
             <app-cart-status></app-cart-status>
           </div>
 
@@ -59,31 +61,39 @@
                 >Contact Us</a
               >
             </li>
-            <li *ngIf="!isLoggedIn(); else elseBlock" class="nav-item">
+            <li class="nav-item ml-auto" *ngIf="isAdmin">
+              <a class="nav-link" routerLink="/admin" routerLinkActive="active"
+                >Admin</a
+              >
+            </li>
+            <li *ngIf="!isLoggedIn; else elseBlock" class="nav-item">
               <a class="nav-link" routerLink="/login" routerLinkActive="active"
                 >Login</a
               >
               <!-- <span class="sr-only">(current)</span> -->
             </li>
-						<ng-template #elseBlock>
-            <div class="dropdown">
-              <button
-                class="btn btn-dark dropdown-toggle"
-                type="button"
-                id="dropdownMenuButton"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                {{ getUsername() | titlecase}}
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <button class="btn btn-dark dropdown-item" (click)="doLogout()">
-                  Logout
+            <ng-template #elseBlock>
+              <div class="dropdown">
+                <button
+                  class="btn btn-dark dropdown-toggle"
+                  type="button"
+                  id="dropdownMenuButton"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  {{ getUsername() | titlecase}}
                 </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <button
+                    class="btn btn-dark dropdown-item"
+                    (click)="doLogout()"
+                  >
+                    Logout
+                  </button>
+                </div>
               </div>
-            </div>
-						</ng-template>
+            </ng-template>
           </ul>
         </div>
       </nav>

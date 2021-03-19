@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { TokenStorageService } from '@services/token-storage.service';
+import { Role } from '@common/role.enum';
 
 @Component({
   selector: 'app-header',
@@ -8,25 +9,23 @@ import { TokenStorageService } from '@services/token-storage.service';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  // isLoggedIn = false;
   roles = '';
+
   constructor(private tokenService: TokenStorageService) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  get isLoggedIn(): boolean {
+    return this.tokenService.isLoggedIn();
   }
 
-    // this.isLoggedIn = !!this.tokenService.getToken();
-
-    // if (this.isLoggedIn) {
-      // const user = this.tokenService.getCurrentUser();
-      // this.roles = user.roles;
-    // }
-
-  public isLoggedIn(): boolean {
-    return this.tokenService.isloggedIn();
-  }
   public doLogout(): void {
     this.tokenService.logout();
+  }
+
+  get isAdmin(): boolean {
+    const user = this.tokenService.getCurrentUser();
+    return user?.roles?.includes(Role.ADMIN);
   }
 
   public getUsername(): string {

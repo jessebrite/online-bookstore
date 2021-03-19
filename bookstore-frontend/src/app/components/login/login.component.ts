@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { User } from '@common/user';
 import { AuthenticationService } from '@services/authentication.service';
@@ -19,15 +19,19 @@ export class LoginComponent implements OnInit {
   url = 'login';
   message = '';
   wrongCredentials = false;
-	returnUrl = ''
+  returnUrl = '';
 
   constructor(
+    private route: ActivatedRoute,
     private router: Router,
     private tokenService: TokenStorageService,
     private authenticationService: AuthenticationService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // this.tokenService.logout(); // reset login status
+    this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
+  }
 
   public onSubmit(form: NgForm): void {
     this.submitted = true;
@@ -42,14 +46,21 @@ export class LoginComponent implements OnInit {
   public doLogin(user: User, url: string): void {
     this.authenticationService
       .processAuthentication(user, url)
-      .subscribe((data: User) => {
+      .subscribe((data: any) => {
         if (!data.token) {
           this.message = data.message;
           this.wrongCredentials = true;
         } else {
+          console.log('data: ', data.roles);
           this.tokenService.saveToken(data.token);
           this.tokenService.saveUser(data);
-          this.router.navigate(['/']);
+          if (data.roles.includes('ROLE_ADMIN')) {
+            // this.router.navigate(['admin/dashboard']);
+									console.log("admin")
+            // this.router.navigateByUrl(this.returnUrl);
+          }
+          this.router.navigateByUrl(this.returnUrl);
+          // this.router.navigate(['/']);
         }
       });
   }

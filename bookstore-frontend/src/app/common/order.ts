@@ -1,8 +1,7 @@
 import { CartItem } from './cart-item';
-import { User } from './user';
-import { TokenStorageService } from '@services/token-storage.service';
 
 export class Order {
+  public id = 0;
   public firstname = '';
   public lastname = '';
   public email = '';
@@ -14,9 +13,5 @@ export class Order {
   public shipped = false;
   cartItem: CartItem[] = [];
 
-  constructor() {
-    // this.firstname = user?.firstname || '';
-    // this.lastname = 'golden';
-    // this.email = user?.email || '';
-  }
+  constructor() {}
 }

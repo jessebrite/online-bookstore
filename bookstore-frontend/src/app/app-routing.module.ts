@@ -10,6 +10,9 @@ import { RegisterComponent } from '@components/register/register.component';
 import { LoginComponent } from '@components/login/login.component';
 import { AboutComponent } from '@components/about/about.component';
 import { ContactComponent } from '@components/contact/contact.component';
+import { AuthGuard } from './guards/auth.guard';
+import { AdminGuard } from './guards/admin.guard';
+import { Role } from '@common/role.enum';
 
 const routes: Routes = [
   { path: 'books/:id', component: BookDetailsComponent },
@@ -17,12 +20,19 @@ const routes: Routes = [
   { path: 'category/:id', component: BookListComponent },
   { path: 'cart-details', component: CartDetailsComponent },
   { path: 'books', component: BookListComponent },
-  { path: 'checkout', component: CheckoutComponent },
+  { path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'about', component: AboutComponent },
   { path: 'contact', component: ContactComponent },
   { path: '', redirectTo: 'books', pathMatch: 'full' },
+  {
+    path: 'admin',
+    loadChildren: () =>
+      import('./admin/admin.module').then((m) => m.AdminModule),
+    canActivate: [AdminGuard],
+    data: { roles: Role.ADMIN },
+  },
   { path: '**', component: PageNotFoundComponent },
 ];
 

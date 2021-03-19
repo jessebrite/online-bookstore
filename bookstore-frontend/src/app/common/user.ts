@@ -1,3 +1,5 @@
+import { Role } from './role.enum';
+
 export class User {
   firstname = '';
   lastname = '';
@@ -6,5 +8,6 @@ export class User {
   password = '';
   confirmPassword = '';
   message = '';
+  role =  Role.USER;
   token = '';
 }

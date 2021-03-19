@@ -8,7 +8,9 @@ import {
 } from '@angular/router';
 import { Observable } from 'rxjs';
 
-const USER_KEY = 'auth-user';
+import { environment } from '@environments/environment';
+
+const USER_KEY = environment.user_key;
 
 @Injectable({
   providedIn: 'root',
