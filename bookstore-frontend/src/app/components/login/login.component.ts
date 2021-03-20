@@ -55,11 +55,14 @@ export class LoginComponent implements OnInit {
           this.tokenService.saveToken(data.token);
           this.tokenService.saveUser(data);
           if (
-            this.route.snapshot.queryParams.returnUrl === '/admin' &&
+            this.route.snapshot.queryParams.returnUrl.startsWith('/admin') &&
             !data.roles.includes('ROLE_ADMIN')
           ) {
             // console.log('anada anda');
             this.message = 'Unauthorized!';
+            setTimeout(() => {
+              this.router.navigate(['/']);
+            }, 250);
           }
           this.router.navigateByUrl(this.returnUrl);
         }

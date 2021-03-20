@@ -27,7 +27,7 @@ export class BookListComponent implements OnInit {
 
   constructor(
     private bookService: BookService,
-    private activatedRoute: ActivatedRoute,
+    private route: ActivatedRoute,
     private cartService: CartService,
     private ngxSpinnerService: NgxSpinnerService,
     private ngbConfig: NgbPaginationConfig
@@ -36,14 +36,14 @@ export class BookListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.activatedRoute.paramMap.subscribe(() => {
+    this.route.paramMap.subscribe(() => {
       this.listBooks();
     });
   }
 
   public listBooks(): void {
     this.ngxSpinnerService.show(); // show spinner on page load
-    this.searchMode = this.activatedRoute.snapshot.paramMap.has('keyword');
+    this.searchMode = this.route.snapshot.paramMap.has('keyword');
 
     if (this.searchMode) {
       this.handleSearchBooks();
@@ -64,7 +64,7 @@ export class BookListComponent implements OnInit {
 
   private handleSearchBooks(): void {
     // Using '!'. Refer to handleListBooks() method
-    const keyword: string = this.activatedRoute.snapshot.paramMap.get(
+    const keyword: string = this.route.snapshot.paramMap.get(
       'keyword'
     )!;
 
@@ -74,7 +74,7 @@ export class BookListComponent implements OnInit {
   }
 
   private handleListBooks(): void {
-    const hasCategoryId: boolean = this.activatedRoute.snapshot.paramMap.has(
+    const hasCategoryId: boolean = this.route.snapshot.paramMap.has(
       'id'
     );
 
@@ -82,7 +82,7 @@ export class BookListComponent implements OnInit {
       // using non-null assertion operator '!'
       // since 'hasCategoryId' certainly contains a value by now,
       // it deals with "Object is possibly 'null'" error
-      this.currentCategoryId = +this.activatedRoute.snapshot.paramMap.get(
+      this.currentCategoryId = +this.route.snapshot.paramMap.get(
         'id'
       )!;
     } else {

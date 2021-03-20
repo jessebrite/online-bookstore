@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
+import { map } from 'rxjs/operators';
 
+import { Location } from '@angular/common';
 import { Book } from '@app/common/book';
 import { BookService } from '@services/book.service';
 import { CartService } from '@services/cart.service';
@@ -16,20 +17,20 @@ export class BookDetailsComponent implements OnInit {
   book: Book = new Book();
 
   constructor(
-    private activatedRoute: ActivatedRoute,
+    private route: ActivatedRoute,
     private bookService: BookService,
     private location: Location,
     private cartService: CartService
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.paramMap.subscribe(() => {
+    this.route.paramMap.subscribe(() => {
       this.bookInfo();
     });
   }
 
   public bookInfo(): void {
-    const id: number = +this.activatedRoute.snapshot.paramMap.get('id')!;
+    const id = +this.route.snapshot.paramMap.get('id')!;
     this.bookService.getBookDetails(id).subscribe((data: Book) => {
       this.book = data;
     }, this.handleError);
