@@ -15,13 +15,14 @@ export class AdminBookService {
 
   constructor(private httpClient: HttpClient) {}
 
-  public getBooks(currentPage: number, pageSize: number): Observable<Book[]> {
+  public getBooks(
+    currentPage: number,
+    pageSize: number
+  ): Observable<GetResponseBook> {
     const params: string = [`page=${currentPage}`, `size=${pageSize}`].join(
       '&'
     );
     const bookUrl = `${this.apiBaseUrl}/books?${params}`;
-    return this.httpClient
-      .get<GetResponseBook>(bookUrl)
-      .pipe(map((response) => response._embedded.books));
+    return this.httpClient.get<GetResponseBook>(bookUrl);
   }
 }

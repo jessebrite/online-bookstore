@@ -28,10 +28,7 @@ export class LoginComponent implements OnInit {
     private authenticationService: AuthenticationService
   ) {}
 
-  ngOnInit(): void {
-    this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
-    // console.log(this.returnUrl);
-  }
+  ngOnInit(): void {}
 
   public onSubmit(form: NgForm): void {
     this.submitted = true;
