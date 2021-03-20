@@ -29,8 +29,8 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.tokenService.logout(); // reset login status
     this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
+    // console.log(this.returnUrl);
   }
 
   public onSubmit(form: NgForm): void {
@@ -51,16 +51,17 @@ export class LoginComponent implements OnInit {
           this.message = data.message;
           this.wrongCredentials = true;
         } else {
-          console.log('data: ', data.roles);
+          // console.log('data: ', data.roles);
           this.tokenService.saveToken(data.token);
           this.tokenService.saveUser(data);
-          if (data.roles.includes('ROLE_ADMIN')) {
-            // this.router.navigate(['admin/dashboard']);
-									console.log("admin")
-            // this.router.navigateByUrl(this.returnUrl);
+          if (
+            this.route.snapshot.queryParams.returnUrl === '/admin' &&
+            !data.roles.includes('ROLE_ADMIN')
+          ) {
+            // console.log('anada anda');
+            this.message = 'Unauthorized!';
           }
           this.router.navigateByUrl(this.returnUrl);
-          // this.router.navigate(['/']);
         }
       });
   }

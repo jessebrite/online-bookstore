@@ -17,11 +17,14 @@ const USER_KEY = environment.user_key;
   providedIn: 'root',
 })
 export class AdminGuard implements CanActivate {
-  constructor(private router: Router, private tokenService: TokenStorageService) {}
+  constructor(
+    private router: Router,
+    private tokenService: TokenStorageService
+  ) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot,
+    state: RouterStateSnapshot
   ):
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree>
@@ -29,6 +32,7 @@ export class AdminGuard implements CanActivate {
     | UrlTree {
     const user = this.tokenService.getCurrentUser();
     if (user) {
+      // navigate only if user has authorized role
       if (route.data?.roles.indexOf(user.roles) !== -1) {
         return true;
       }
