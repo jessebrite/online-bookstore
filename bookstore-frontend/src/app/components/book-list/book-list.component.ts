@@ -64,9 +64,7 @@ export class BookListComponent implements OnInit {
 
   private handleSearchBooks(): void {
     // Using '!'. Refer to handleListBooks() method
-    const keyword: string = this.route.snapshot.paramMap.get(
-      'keyword'
-    )!;
+    const keyword: string = this.route.snapshot.paramMap.get('keyword')!;
 
     this.bookService.searchBooksByKeywork(keyword).subscribe((data) => {
       this.books = data;
@@ -74,17 +72,13 @@ export class BookListComponent implements OnInit {
   }
 
   private handleListBooks(): void {
-    const hasCategoryId: boolean = this.route.snapshot.paramMap.has(
-      'id'
-    );
+    const hasCategoryId: boolean = this.route.snapshot.paramMap.has('id');
 
     if (hasCategoryId) {
       // using non-null assertion operator '!'
       // since 'hasCategoryId' certainly contains a value by now,
       // it deals with "Object is possibly 'null'" error
-      this.currentCategoryId = +this.route.snapshot.paramMap.get(
-        'id'
-      )!;
+      this.currentCategoryId = +this.route.snapshot.paramMap.get('id')!;
     } else {
       this.currentCategoryId = 1;
     }
@@ -102,7 +96,7 @@ export class BookListComponent implements OnInit {
 
   private processPaginate(): any {
     return (data: any) => {
-						console.log('data: ', data)
+      // console.log('data: ', data)
       this.ngxSpinnerService.hide(); // hide spinner once there's data
       this.books = data._embedded.books; // assign returned data to books
       this.currentPage = data.page.number + 1; // starts from index 1

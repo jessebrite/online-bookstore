@@ -28,7 +28,9 @@ export class LoginComponent implements OnInit {
     private authenticationService: AuthenticationService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.returnUrl = this.route.snapshot.queryParams.returnUrl;
+  }
 
   public onSubmit(form: NgForm): void {
     this.submitted = true;
@@ -52,7 +54,7 @@ export class LoginComponent implements OnInit {
           this.tokenService.saveToken(data.token);
           this.tokenService.saveUser(data);
           if (
-            this.route.snapshot.queryParams.returnUrl.startsWith('/admin') &&
+            this.returnUrl?.startsWith('/admin') &&
             !data.roles.includes('ROLE_ADMIN')
           ) {
             // console.log('anada anda');
@@ -61,7 +63,11 @@ export class LoginComponent implements OnInit {
               this.router.navigate(['/']);
             }, 250);
           }
-          this.router.navigateByUrl(this.returnUrl);
+          if (this.returnUrl) {
+            this.router.navigateByUrl(this.returnUrl);
+          } else {
+            this.router.navigate(['/']);
+          }
         }
       });
   }

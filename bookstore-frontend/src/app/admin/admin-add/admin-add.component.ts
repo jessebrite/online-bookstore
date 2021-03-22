@@ -12,13 +12,17 @@ import { Book } from '@common/book';
 })
 export class AdminAddComponent implements OnInit {
   book: Book = new Book();
+	bookSent = false;
+	submitted = false;
 
   constructor(private bookService: AdminBookService, private router: Router) {}
 
   ngOnInit(): void {}
 
   public onSubmit(form: NgForm): void {
+					this.submitted = true;
     if (form.valid) {
+						this.bookSent = true;
       this.addBook(this.book);
     }
   }

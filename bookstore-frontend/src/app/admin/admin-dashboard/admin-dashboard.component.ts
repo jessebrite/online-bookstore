@@ -42,11 +42,20 @@ export class AdminDashboardComponent implements OnInit {
     );
   }
 
-  public deleteBook(id: string): void {}
+  public deleteBook(book: string): void {
+    if (window.confirm('Are you sure?')) {
+      this.bookService.deleteBook(book).subscribe((data) => {
+        this.books.splice(
+          this.books.findIndex((tempItem) => data.id === tempItem.id),
+          1
+        );
+      });
+    }
+  }
 
   private processPaginate(): any {
     return (data: any) => {
-      console.log('daga: ', data);
+      // console.log('daga: ', data);
       this.ngxSpinnerService.hide(); // hide spinner once there's data
       this.books = data._embedded.books; // assign returned data to books
       this.currentPage = data.page.number + 1; // starts from index 1

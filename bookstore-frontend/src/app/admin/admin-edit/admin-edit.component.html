@@ -1,1 +1,116 @@
-<p>admin-edit works!</p>
+<div class="col d-flex justify-content-center">
+  <div class="col-md-8">
+    <div class="card bg-light m-3">
+      <h5 class="card-header text-center">Add Book</h5>
+      <div class="card-body">
+        <form #form="ngForm" novalidate (ngSubmit)="onSubmit(form)" class="m-2">
+          <div class="form-group">
+            <label for="name">Book Name</label>
+            <input
+              class="form-control"
+              #name="ngModel"
+              name="name"
+              id="name"
+              [(ngModel)]="book.name"
+              [ngClass]="{ 'is-invalid': submitted && name.invalid }"
+              [ngClass]="{ 'is-valid': submitted && name.valid }"
+              required
+            />
+            <span *ngIf="submitted && name.invalid" class="text-danger">
+              Please enter your book name
+            </span>
+          </div>
+
+          <div class="form-group">
+            <label for="sku">Sku</label>
+            <input
+              class="form-control"
+              #sku="ngModel"
+              name="sku"
+              id="sku"
+              [(ngModel)]="book.sku"
+              [ngClass]="{ 'is-invalid': submitted && sku.invalid }"
+              [ngClass]="{ 'is-valid': submitted && sku.valid }"
+              required
+            />
+            <div *ngIf="submitted && sku.invalid" class="text-danger">
+              <span *ngIf="sku.errors?.required">Please enter sku</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="unitPrice">Unit Price</label>
+            <input
+              class="form-control"
+              #unitPrice="ngModel"
+              name="unitPrice"
+              id="unitPrice"
+              [(ngModel)]="book.unitPrice"
+              [ngClass]="{ 'is-invalid': submitted && unitPrice.invalid }"
+              [ngClass]="{ 'is-valid': submitted && unitPrice.valid }"
+              minlength="3"
+              type="number"
+            />
+            <div *ngIf="submitted && unitPrice.invalid" class="text-danger">
+              <span *ngIf="unitPrice.errors?.required"
+                >Please enter unit price</span
+              >
+              <span *ngIf="unitPrice.errors?.minlength"
+                >Price must be at least 3 characters long</span
+              >
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="unitsInStock">Units in Stock</label>
+            <input
+              class="form-control"
+              #unitsInStock="ngModel"
+              name="unitsInStock"
+              id="unitsInStock"
+              [(ngModel)]="book.unitsInStock"
+              [ngClass]="{ 'is-invalid': submitted && unitsInStock.invalid }"
+              [ngClass]="{ 'is-valid': submitted && unitsInStock.valid }"
+              minlength="3"
+              type="number"
+            />
+            <div *ngIf="submitted && unitsInStock.invalid" class="text-danger">
+              <span *ngIf="unitsInStock.errors?.required"
+                >Please enter unit price</span
+              >
+              <span *ngIf="unitsInStock.errors?.minlength"
+                >Price must be at least 3 characters long</span
+              >
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea
+              class="form-control"
+              #description="ngModel"
+              name="description"
+							rows="4"
+              id="description"
+              [(ngModel)]="book.description"
+              [ngClass]="{ 'is-invalid': submitted && description.invalid }"
+              [ngClass]="{ 'is-valid': submitted && description.valid }"
+            >
+            </textarea>
+            <div *ngIf="submitted && description.invalid" class="text-danger">
+              <span *ngIf="description.errors?.required"
+                >Please enter book description</span
+              >
+            </div>
+          </div>
+
+          <div class="text-center">
+            <button class="btn btn-secondary m-1" type="submit">
+              Edit Book
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

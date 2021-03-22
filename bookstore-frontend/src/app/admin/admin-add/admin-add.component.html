@@ -1,48 +1,177 @@
-<div
-  class="bg-primary p-2 text-white"
-  [class.bg-warning]="editing"
-  [class.text-dark]="editing"
->
-  <!-- <h5>{{editing ? "Edit" : "Create"}} Product</h5> -->
+<div class="col d-flex justify-content-center">
+  <div class="col-md-8">
+    <div class="card bg-light m-3">
+      <h5 class="card-header text-center">Add Book</h5>
+      <div class="card-body">
+        <!-- <div -->
+          <!-- *ngIf="formError" -->
+          <!-- class="alert alert-warning alert-dismissible fade show text-center" -->
+          <!-- role="alert" -->
+        <!-- > -->
+          <!-- [> <strong>Warning!</strong> <] -->
+          <!-- [> {{formError}} <] -->
+          <!-- <button -->
+            <!-- type="button" -->
+            <!-- class="close" -->
+            <!-- data-dismiss="alert" -->
+            <!-- aria-label="Close" -->
+          <!-- > -->
+            <!-- <span aria-hidden="true">&times;</span> -->
+          <!-- </button> -->
+        <!-- </div> -->
+
+        <!-- <ng-template #elseTemplate> -->
+          <!-- <div -->
+            <!-- class="alert alert-success alert-dismissible fade show text-center" -->
+            <!-- role="alert" -->
+          <!-- > -->
+					<!-- [> {{successMessage}} <] -->
+            <!-- <button -->
+              <!-- type="button" -->
+              <!-- class="close" -->
+              <!-- data-dismiss="alert" -->
+              <!-- aria-label="Close" -->
+            <!-- > -->
+              <!-- <span aria-hidden="true">&times;</span> -->
+            <!-- </button> -->
+          <!-- </div> -->
+        <!-- </ng-template> -->
+
+				<!-- <div *ngIf="errorMessage.length > 0" -->
+            <!-- class="alert alert-danger alert-dismissible fade show text-center" -->
+            <!-- role="alert" -->
+          <!-- > -->
+					<!-- {{errorMessage}} -->
+            <!-- <button -->
+              <!-- type="button" -->
+              <!-- class="close" -->
+              <!-- data-dismiss="alert" -->
+              <!-- aria-label="Close" -->
+            <!-- > -->
+              <!-- <span aria-hidden="true">&times;</span> -->
+            <!-- </button> -->
+          <!-- </div> -->
+
+        <form
+          #form="ngForm"
+          novalidate
+          (ngSubmit)="onSubmit(form)"
+          class="m-2"
+        >
+
+          <div class="form-group">
+            <label for="name">Book Name</label>
+            <input
+              class="form-control"
+              #name="ngModel"
+              name="name"
+              id="name"
+              [(ngModel)]="book.name"
+              [ngClass]="{ 'is-invalid': submitted && name.invalid }"
+              [ngClass]="{ 'is-valid': submitted && name.valid }"
+              required
+            />
+            <span *ngIf="submitted && name.invalid" class="text-danger">
+              Please enter your book name
+            </span>
+          </div>
+
+          <div class="form-group">
+            <label for="sku">Sku</label>
+            <input
+              class="form-control"
+              #sku="ngModel"
+              name="sku"
+              id="sku"
+              [(ngModel)]="book.sku"
+              [ngClass]="{ 'is-invalid': submitted && sku.invalid }"
+              [ngClass]="{ 'is-valid': submitted && sku.valid }"
+							minlength="3"
+              required
+            />
+            <div *ngIf="submitted && sku.invalid" class="text-danger">
+              <span *ngIf="sku.errors?.required"
+                >Please enter your sku</span
+              >
+              <span *ngIf="sku.errors?.minlength"
+                >Username must be at least 3 chareacters long</span
+              >
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="unitPrice">Unit Price</label>
+            <input
+              class="form-control"
+              #unitPrice="ngModel"
+              name="unitPrice"
+              id="unitPrice"
+              [(ngModel)]="book.unitPrice"
+              [ngClass]="{ 'is-invalid': submitted && unitPrice.invalid }"
+              [ngClass]="{ 'is-valid': submitted && unitPrice.valid }"
+							minlength="3"
+              required
+            />
+            <div *ngIf="submitted && unitPrice.invalid" class="text-danger">
+              <span *ngIf="unitPrice.errors?.required"
+                >Please enter Unit Price</span
+              >
+              <span *ngIf="unitPrice.errors?.minlength"
+                >Username must be at least 3 chareacters long</span
+              >
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="unitsInStock">Units in Stock</label>
+            <input
+              class="form-control"
+              #unitsInStock="ngModel"
+              name="unitsInStock"
+              id="unitsInStock"
+              [(ngModel)]="book.unitsInStock"
+              [ngClass]="{ 'is-invalid': submitted && unitsInStock.invalid }"
+              [ngClass]="{ 'is-valid': submitted && unitsInStock.valid }"
+              minlength="3"
+              type="number"
+            />
+            <div *ngIf="submitted && unitsInStock.invalid" class="text-danger">
+              <span *ngIf="unitsInStock.errors?.required"
+                >Please enter unit price</span
+              >
+              <span *ngIf="unitsInStock.errors?.minlength"
+                >Price must be at least 3 characters long</span
+              >
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea
+              class="form-control"
+              #description="ngModel"
+              name="description"
+							rows="4"
+              id="description"
+              [(ngModel)]="book.description"
+              [ngClass]="{ 'is-invalid': submitted && description.invalid }"
+              [ngClass]="{ 'is-valid': submitted && description.valid }"
+            >
+            </textarea>
+            <div *ngIf="submitted && description.invalid" class="text-danger">
+              <span *ngIf="description.errors?.required"
+                >Please enter book description</span
+              >
+            </div>
+          </div>
+
+          <div class="text-center">
+            <button class="btn btn-secondary m-1" type="submit">
+              Add Book
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
-<form novalidate #form="ngForm" (ngSubmit)="onSubmit(form)">
-  <div class="form-group">
-    <label>Name</label>
-    <input class="form-control" name="name" [(ngModel)]="book.name" />
-  </div>
-  <!-- <div class="form-group"> -->
-    <!-- <label>Category</label> -->
-    <!-- <input -->
-      <!-- class="form-control" -->
-      <!-- name="category" -->
-      <!-- [(ngModel)]="book.category" -->
-    <!-- /> -->
-  <!-- </div> -->
-  <div class="form-group">
-    <label>Description</label>
-    <textarea
-      class="form-control"
-      name="description"
-      [(ngModel)]="book.description"
-    >
-    </textarea>
-  </div>
-  <div class="form-group">
-    <label>Price</label>
-    <input class="form-control" name="unitPrice" [(ngModel)]="book.unitPrice" />
-  </div>
-  <button
-    type="submit"
-    class="btn btn-primary m-1"
-  >
-    <!-- {{editing ? "Save" : "Create"}} -->
-		Add
-  </button>
-  <button
-    type="reset"
-    class="btn btn-secondary"
-    routerLink="/admin/dashboard"
-  >
-    Cancel
-  </button>
-</form>
