@@ -83,7 +83,9 @@ public class AuthController {
 
 			return ResponseEntity.ok(new JwtResponse(
 				jwt, userDetails.getId(), userDetails.getFirstname(), userDetails.getLastname(),
-			 	userDetails.getUsername(), userDetails.getEmail(), roles));
+			 	userDetails.getUsername(), userDetails.getEmail(), userDetails.getStreet(),
+				userDetails.getCity(), userDetails.getState(), userDetails.getCountry(),
+				userDetails.getPhoneNumbr(), roles));
 		} catch (AuthenticationException authException) {
 			SecurityContextHolder.getContext().setAuthentication(null);
 			return new MessageResponse("Wrong username/password combination");
@@ -110,7 +112,9 @@ public class AuthController {
 		}
 
 		User user = new User(register.getFirstname(), register.getLastname(), register.getUsername(),
-			register.getEmail(), passwordEncoder.encode(register.getPassword()));
+			register.getEmail(), passwordEncoder.encode(register.getPassword()), register.getStreet(),
+			register.getCity(), register.getState(), register.getZip(), register.getCountry(), register.getPhoneNumber()
+			);
 
 		Set<String> strRole = register.getRole();
 		Set<Role> roles = new HashSet<>();

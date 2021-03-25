@@ -12,6 +12,6 @@
 #            (NULL, 'Baah', 'Akyeamfour', 'jantrumaen', 'jantru@maen.me', '5ecret', false),
 #            (NULL, 'Anim', 'Asante', 'anim1', 'anim1@mine.ca', 'word', true);
 
-INSERT INTO roles(name) VALUES('ROLE_USER');
-INSERT INTO roles(name) VALUES('ROLE_MODERATOR');
-INSERT INTO roles(name) VALUES('ROLE_ADMIN');
+# INSERT INTO roles(name) VALUES('ROLE_USER');
+# INSERT INTO roles(name) VALUES('ROLE_MODERATOR');
+# INSERT INTO roles(name) VALUES('ROLE_ADMIN');

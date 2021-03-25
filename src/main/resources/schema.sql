@@ -2,10 +2,10 @@
 -- Yet to fine-tune it to my needs and put into production
 -- what we have are skeletons populated with dummy data
 
-DROP TABLE IF EXISTS `book-store-dev`.`role`;
+-- DROP TABLE IF EXISTS `book-store-dev`.`role`;
 
 -- use only once before production
-DROP TABLE IF EXISTS `book-store-dev`.`users`;
+-- DROP TABLE IF EXISTS `book-store-dev`.`users`;
 --
 -- CREATE TABLE IF NOT EXISTS `book-store-dev`.`users` (
 --     `id` INT NOT NULL AUTO_INCREMENT,
@@ -18,10 +18,10 @@ DROP TABLE IF EXISTS `book-store-dev`.`users`;
 --     `enabled` BOOLEAN NOT NULL,
 --     PRIMARY KEY (`id`));
 --
-DROP TABLE IF EXISTS `book-store-dev`.`authorities`;
+-- DROP TABLE IF EXISTS `book-store-dev`.`authorities`;
 --
--- CREATE TABLE IF NOT EXISTS `book-store-dev`.`authorities` (
--- 	 `id` INT NOT NULL AUTO_INCREMENT,
--- 	 `username` VARCHAR(45) NULL,
--- 	 `authority` VARCHAR(45) NULL,
--- 	 PRIMARY KEY (`id`));
+CREATE TABLE IF NOT EXISTS `book-store-dev`.`authorities` (
+	 `id` INT NOT NULL AUTO_INCREMENT,
+	 `username` VARCHAR(45) NULL,
+	 `authority` VARCHAR(45) NULL,
+	 PRIMARY KEY (`id`));

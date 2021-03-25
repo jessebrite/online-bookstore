@@ -3,7 +3,6 @@ package com.onus.onlinebookstore.services;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.onus.onlinebookstore.entity.User;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,7 +13,6 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Data
-@NoArgsConstructor(force = true)
 public class UserDetailsImplementation implements UserDetails {
 	private static final long serialVersionUID = 1L;
 
@@ -23,14 +21,22 @@ public class UserDetailsImplementation implements UserDetails {
 	private final String lastname;
 	private final String username;
 	private final String email;
+	private final String street;
+	private final String city;
+	private final String state;
+	private final String zip;
+	private final String country;
+	private final String phoneNumbr;
 
 	@JsonIgnore
 	private final String password;
 
-	private Collection<? extends GrantedAuthority> authorities;
+	private final Collection<? extends GrantedAuthority> authorities;
 
 	public UserDetailsImplementation(Long id, String firstname, String lastname,
 	                                 String username, String email, String password,
+	                                 String street, String city, String state,String zip, String country,
+	                                 String phoneNumbr,
 	                                 Collection<? extends GrantedAuthority> authorities) {
 		this.id = id;
 		this.firstname = firstname;
@@ -38,6 +44,12 @@ public class UserDetailsImplementation implements UserDetails {
 		this.username = username;
 		this.email = email;
 		this.password = password;
+		this.street = street;
+		this.city = city;
+		this.state = state;
+		this.zip = zip;
+		this.country = country;
+		this.phoneNumbr = phoneNumbr;
 		this.authorities = authorities;
 	}
 
@@ -53,6 +65,12 @@ public class UserDetailsImplementation implements UserDetails {
 			user.getUsername(),
 			user.getEmail(),
 			user.getPassword(),
+			user.getStreet(),
+			user.getCity(),
+			user.getState(),
+			user.getZip(),
+			user.getCountry(),
+			user.getPhoneNumber(),
 			authorities
 		);
 	}

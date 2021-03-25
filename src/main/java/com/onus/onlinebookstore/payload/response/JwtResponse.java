@@ -1,33 +1,27 @@
 package com.onus.onlinebookstore.payload.response;
 
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
 @Data
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@RequiredArgsConstructor
 public class JwtResponse {
-	private String token;
-	private String type = "Bearer";
-	private Long id;
-	private String firstname;
-	private String lastname;
-	private String username;
-	private String email;
-	private List<String> roles;
-
-	public JwtResponse(String token,
-	                   Long id,
-	                   String firstname,
-	                   String lastname,
-	                   String username,
-	                   String email,
-	                   List<String> roles) {
-		this.token = token;
-		this.id = id;
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.username = username;
-		this.email = email;
-		this.roles = roles;
-	}
+	private final String token;
+	private final String type = "Bearer";
+	private final Long id;
+	private final String firstname;
+	private final String lastname;
+	private final String username;
+	private final String email;
+	private final String street;
+	private final String city;
+	private final String state;
+	private final String country;
+	private final String phoneNumber;
+	private final List<String> roles;
 }

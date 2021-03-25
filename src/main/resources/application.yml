@@ -4,7 +4,7 @@ spring:
     url: jdbc:mysql://localhost:3306/book-store-dev
     username: abj
     password: abj.MySQL_4_L!fe
-    # initialization-mode: always
+    initialization-mode: always
 
   jpa:
     show-sql: true

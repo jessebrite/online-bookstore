@@ -15,12 +15,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import javax.annotation.Resource;
-import java.util.Arrays;
-import java.util.Collections;
 
 //@Configuration // not needed if using @ENableWebSecurity
 @EnableWebSecurity
@@ -56,7 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.cors()
-//				.configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues())
+				.configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues())
 			.and().csrf().disable()
 			.exceptionHandling()
 				.authenticationEntryPoint(unauthorizedHandler)
@@ -85,17 +81,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService)
 			.passwordEncoder(passwordEncoder());
-	}
-
-	@Bean
-	CorsConfigurationSource corsConfigurationSource() {
-		CorsConfiguration corsConfiguration = new CorsConfiguration();
-		corsConfiguration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
-		corsConfiguration.setAllowedMethods(
-			Arrays.asList("GET", "POST", "PUT", "OPTIONS", "PATCH", "DELETE"));
-		corsConfiguration.setAllowedHeaders(Collections.singletonList("*"));
-		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		source.registerCorsConfiguration("/**", corsConfiguration);
-		return source;
 	}
 }
