@@ -43,6 +43,7 @@ export class RegisterComponent implements OnInit {
           }, 1000);
         }
       },
+      // Keep this! Every other server-side error is captured here
       (error) => {
         // console.log('error:	', error)
         this.errorMessage = error;
