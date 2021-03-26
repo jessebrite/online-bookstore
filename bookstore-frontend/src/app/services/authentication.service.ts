@@ -24,7 +24,7 @@ export class AuthenticationService {
   ) {}
 
   public processAuthentication(user: User, url?: string): Observable<User> {
-		console.log('user: ', user);
+    // console.log('user: ', user);
     return this.httpClient
       .post<User>(this.url + url, user, {
         headers: this.headers,
