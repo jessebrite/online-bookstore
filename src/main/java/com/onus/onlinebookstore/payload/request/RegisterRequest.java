@@ -62,5 +62,5 @@ public class RegisterRequest {
 	private final String phoneNumber;
 
 	@Value("${EnumType.STRING:ROLE_USER}")
-	private Set<String> role;
+	private final Set<String> role;
 }

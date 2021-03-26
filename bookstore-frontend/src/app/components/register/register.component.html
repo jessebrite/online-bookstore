@@ -8,29 +8,30 @@
         ></span
       >
       <div class="card-body">
-        <div
-          *ngIf="formError"
-          class="alert alert-warning alert-dismissible fade show text-center"
-          role="alert"
-        >
-          <!-- <strong>Warning!</strong> -->
-          {{formError}}
-          <button
-            type="button"
-            class="close"
-            data-dismiss="alert"
-            aria-label="Close"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
+        <!-- Alert for required fields -->
+        <!-- <div -->
+        <!-- *ngIf="formError" -->
+        <!-- class="alert alert-warning alert-dismissible fade show text-center" -->
+        <!-- role="alert" -->
+        <!-- > -->
+        <!-- [> <strong>Warning!</strong> <] -->
+        <!-- {{formError}} -->
+        <!-- <button -->
+        <!-- type="button" -->
+        <!-- class="close" -->
+        <!-- data-dismiss="alert" -->
+        <!-- aria-label="Close" -->
+        <!-- > -->
+        <!-- <span aria-hidden="true">&times;</span> -->
+        <!-- </button> -->
+        <!-- </div> -->
 
         <ng-template #elseTemplate>
           <div
             class="alert alert-success alert-dismissible fade show text-center"
             role="alert"
           >
-					{{successMessage}}
+            {{successMessage}}
             <button
               type="button"
               class="close"
@@ -42,20 +43,21 @@
           </div>
         </ng-template>
 
-				<div *ngIf="errorMessage.length > 0"
-            class="alert alert-danger alert-dismissible fade show text-center"
-            role="alert"
+        <div
+          *ngIf="errorMessage.length > 0"
+          class="alert alert-danger alert-dismissible fade show text-center"
+          role="alert"
+        >
+          {{errorMessage}}
+          <button
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-label="Close"
           >
-					{{errorMessage}}
-            <button
-              type="button"
-              class="close"
-              data-dismiss="alert"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
 
         <form
           *ngIf="!userSent; else elseTemplate"
@@ -109,7 +111,7 @@
               [(ngModel)]="user.username"
               [ngClass]="{ 'is-invalid': submitted && username.invalid }"
               [ngClass]="{ 'is-valid': submitted && username.valid }"
-							minlength="3"
+              minlength="3"
               required
             />
             <div *ngIf="submitted && username.invalid" class="text-danger">
@@ -194,6 +196,109 @@
               >
             </div>
           </div>
+
+          <div class="form-group">
+            <label for="street">Street Name</label>
+            <input
+              class="form-control"
+              #street="ngModel"
+              name="street"
+              id="street"
+              [(ngModel)]="user.street"
+              [ngClass]="{ 'is-invalid': submitted && street.invalid }"
+              [ngClass]="{ 'is-valid': submitted && street.valid }"
+              required
+            />
+            <span *ngIf="submitted && street.invalid" class="text-danger">
+              Please enter your street name
+            </span>
+          </div>
+
+          <div class="form-group">
+            <label for="city">City Name</label>
+            <input
+              class="form-control"
+              #city="ngModel"
+              name="city"
+              id="city"
+              [(ngModel)]="user.city"
+              [ngClass]="{ 'is-invalid': submitted && city.invalid }"
+              [ngClass]="{ 'is-valid': submitted && city.valid }"
+              required
+            />
+            <span *ngIf="submitted && city.invalid" class="text-danger">
+              Please enter your city name
+            </span>
+          </div>
+
+          <div class="form-group">
+            <label for="city">State Name</label>
+            <input
+              class="form-control"
+              #state="ngModel"
+              name="state"
+              id="state"
+              [(ngModel)]="user.state"
+              [ngClass]="{ 'is-invalid': submitted && state.invalid }"
+              [ngClass]="{ 'is-valid': submitted && state.valid }"
+              required
+            />
+            <span *ngIf="submitted && state.invalid" class="text-danger">
+              Please enter your state
+            </span>
+          </div>
+
+          <div class="form-group">
+            <label for="zip">Zip</label>
+            <input
+              class="form-control"
+              #zip="ngModel"
+              name="zip"
+              id="zip"
+              [(ngModel)]="user.zip"
+              [ngClass]="{ 'is-invalid': submitted && zip.invalid }"
+              [ngClass]="{ 'is-valid': submitted && zip.valid }"
+              required
+            />
+            <span *ngIf="submitted && zip.invalid" class="text-danger">
+              Please enter your zip
+            </span>
+          </div>
+
+          <div class="form-group">
+            <label for="country">Country Name</label>
+            <input
+              class="form-control"
+              #country="ngModel"
+              name="country"
+              id="country"
+              [(ngModel)]="user.country"
+              [ngClass]="{ 'is-invalid': submitted && country.invalid }"
+              [ngClass]="{ 'is-valid': submitted && country.valid }"
+              required
+            />
+            <span *ngIf="submitted && country.invalid" class="text-danger">
+              Please enter your country
+            </span>
+          </div>
+
+          <div class="form-group">
+            <label for="phoneNumber">Phone Name</label>
+            <input
+              class="form-control"
+              #phoneNumber="ngModel"
+              name="phoneNumber"
+              id="phoneNumber"
+              [(ngModel)]="user.phoneNumber"
+              [ngClass]="{ 'is-invalid': submitted && phoneNumber.invalid }"
+              [ngClass]="{ 'is-valid': submitted && phoneNumber.valid }"
+              required
+            />
+            <span *ngIf="submitted && phoneNumber.invalid" class="text-danger">
+              Please enter your Phone number
+            </span>
+          </div>
+
           <div class="text-center">
             <button class="btn btn-secondary m-1" type="submit">
               Register

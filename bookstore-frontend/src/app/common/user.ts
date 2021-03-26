@@ -7,7 +7,13 @@ export class User {
   email = '';
   password = '';
   confirmPassword = '';
+  street = '';
+  city = '';
+  state = '';
+  zip = '';
+  country = '';
+  phoneNumber = '';
   message = '';
-  role =  Role.USER;
+  role = [Role.USER];
   token = '';
 }
