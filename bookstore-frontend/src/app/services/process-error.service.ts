@@ -9,9 +9,11 @@ export class ProcessErrorService {
 
   processError(error: any): Observable<any> {
     let message = '';
-    if (error.error instanceof ErrorEvent) { // client-side
+    // client-side
+    if (error.error instanceof ErrorEvent) {
       message = error.error.message;
-    } else { // server-side
+      // server-side
+    } else {
       // message = `Error Code: ${error.status}\nMessage: ${error.error.message}`;
       message = error.error.message;
     }

@@ -26,7 +26,7 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (window.sessionStorage.getItem(USER_KEY)) {
+    if (localStorage.getItem(USER_KEY)) {
       return true;
     }
 

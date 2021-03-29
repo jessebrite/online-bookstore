@@ -30,9 +30,8 @@ export class CheckoutComponent implements OnInit {
 
   ngOnInit(): void {
     const user = this.tokenService.getCurrentUser();
-    this.order.lastname = user.lastname;
-    this.order.firstname = user.firstname;
-    this.order.email = user.email;
+    this.order = user;
+    // console.log('user: ', this.order);
     this.returnHome();
   }
 

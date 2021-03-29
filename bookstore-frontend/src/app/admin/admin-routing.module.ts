@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: 'dashboard', component: AdminDashboardComponent },
   { path: 'addBook', component: AdminAddComponent },
   { path: 'editBook/:id', component: AdminEditComponent },
-  { path: '', redirectTo: 'dashboard' },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full'  },
 ];
 
 @NgModule({
