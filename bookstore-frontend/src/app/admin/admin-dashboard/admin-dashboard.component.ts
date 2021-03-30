@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 
 import { AdminBookService } from '../services/admin-book.service';
 import { Book } from '@common/book';
@@ -16,15 +15,13 @@ export class AdminDashboardComponent implements OnInit {
   currentPage = 1;
   pageSize = 10;
   totalRecords = 0;
+  maxSize = 3;
 
   constructor(
     private bookService: AdminBookService,
     private ngxSpinnerService: NgxSpinnerService,
-    private ngbConfig: NgbPaginationConfig,
     private route: ActivatedRoute
-  ) {
-    ngbConfig.maxSize = 3;
-  }
+  ) {}
 
   ngOnInit(): void {
     // this.route.paramMap.subscribe(() => {
