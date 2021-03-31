@@ -41,4 +41,10 @@ public class Book {
 	@ManyToOne
 	@JoinColumn(name = "category_id", nullable = false)
 	private BookCategory category;
+
+	@PreUpdate
+	@PrePersist
+	void updatedOn() {
+		this.updatedOn = new Date();
+	}
 }
