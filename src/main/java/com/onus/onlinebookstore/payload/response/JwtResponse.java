@@ -1,5 +1,6 @@
 package com.onus.onlinebookstore.payload.response;
 
+import com.onus.onlinebookstore.entity.Cart;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,4 +25,5 @@ public class JwtResponse {
 	private final String country;
 	private final String phoneNumber;
 	private final List<String> roles;
+	private final List<Cart> carts;
 }

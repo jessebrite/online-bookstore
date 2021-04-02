@@ -71,10 +71,11 @@ export class CheckoutComponent implements OnInit {
    */
   private sendOrder(): void {
     this.cartService.getItemsInCart()?.forEach((cartItem: CartItem) => {
-      this.order.cartItem?.push(cartItem);
+      this.order.carts?.push(cartItem);
     });
 
     this.checkoutService.processOrder(this.order).subscribe((data: Order) => {
+      console.log('all: ', data);
       this.order = data;
       this.clear();
     });

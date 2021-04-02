@@ -1,5 +1,6 @@
 package com.onus.onlinebookstore.controllers;
 
+import com.onus.onlinebookstore.entity.Cart;
 import com.onus.onlinebookstore.entity.ERole;
 import com.onus.onlinebookstore.entity.Role;
 import com.onus.onlinebookstore.entity.User;
@@ -25,6 +26,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -81,11 +83,13 @@ public class AuthController {
 				.map(GrantedAuthority::getAuthority)
 				.collect(Collectors.toList());
 
+			List<Cart> carts = new ArrayList<>();
+
 			return ResponseEntity.ok(new JwtResponse(
 				jwt, userDetails.getId(), userDetails.getFirstname(), userDetails.getLastname(),
 			 	userDetails.getUsername(), userDetails.getEmail(), userDetails.getStreet(),
 				userDetails.getCity(), userDetails.getState(), userDetails.getCountry(),
-				userDetails.getPhoneNumbr(), roles));
+				userDetails.getPhoneNumbr(), roles, carts));
 		} catch (AuthenticationException authException) {
 			SecurityContextHolder.getContext().setAuthentication(null);
 			return new MessageResponse("Wrong username/password combination");
@@ -118,6 +122,7 @@ public class AuthController {
 
 		Set<String> strRole = register.getRole();
 		Set<Role> roles = new HashSet<>();
+		Set<Cart> carts = new HashSet<>();
 
 		if (strRole == null) {
 			Role userRole = roleRepository.findByName(ERole.ROLE_USER)

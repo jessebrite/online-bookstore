@@ -11,7 +11,7 @@ export class Order {
   public zip = '';
   public country = '';
   public shipped = false;
-  cartItem: CartItem[] = [];
+  carts: CartItem[] = [];
 
   constructor() {}
 }
