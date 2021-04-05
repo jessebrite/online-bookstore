@@ -89,7 +89,7 @@ public class AuthController {
 				jwt, userDetails.getId(), userDetails.getFirstname(), userDetails.getLastname(),
 			 	userDetails.getUsername(), userDetails.getEmail(), userDetails.getStreet(),
 				userDetails.getCity(), userDetails.getState(), userDetails.getCountry(),
-				userDetails.getPhoneNumbr(), roles, carts));
+				userDetails.getPhoneNumber(), roles, carts));
 		} catch (AuthenticationException authException) {
 			SecurityContextHolder.getContext().setAuthentication(null);
 			return new MessageResponse("Wrong username/password combination");

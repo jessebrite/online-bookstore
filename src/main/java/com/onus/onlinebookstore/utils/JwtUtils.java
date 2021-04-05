@@ -20,10 +20,10 @@ public class JwtUtils {
 	private int jwtExpirationMs;
 
 	public String generateJwtToken(Authentication authentication) {
-		UserDetailsImplementation userPrincepal =
+		UserDetailsImplementation userPrincipal =
 			(UserDetailsImplementation) authentication.getPrincipal();
 		return Jwts.builder()
-			.setSubject(userPrincepal.getUsername())
+			.setSubject(userPrincipal.getUsername())
 			.setIssuedAt(new Date())
 			.setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
 			.signWith(SignatureAlgorithm.HS512, jwtSecret)
@@ -31,7 +31,12 @@ public class JwtUtils {
 	}
 
 	public String getUserNameFromJwtToken(String token) {
-		return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
+		try {
+			return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
+		} catch (SignatureException exception) {
+			logger.error("Invalid JWT signature: {}", exception.getMessage());
+		}
+		return "Error found while parsing jwt";
 	}
 
 	public boolean validateJwtToken(String authToken) {
@@ -49,7 +54,6 @@ public class JwtUtils {
 		} catch (IllegalArgumentException exception) {
 			logger.error("JWT claims string is empty: {}", exception.getMessage());
 		}
-
 		return false;
 	}
 }

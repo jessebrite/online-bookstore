@@ -9,7 +9,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Data
@@ -26,7 +25,7 @@ public class UserDetailsImplementation implements UserDetails {
 	private final String state;
 	private final String zip;
 	private final String country;
-	private final String phoneNumbr;
+	private final String phoneNumber;
 
 	@JsonIgnore
 	private final String password;
@@ -36,7 +35,7 @@ public class UserDetailsImplementation implements UserDetails {
 	public UserDetailsImplementation(Long id, String firstname, String lastname,
 	                                 String username, String email, String password,
 	                                 String street, String city, String state,String zip, String country,
-	                                 String phoneNumbr,
+	                                 String phoneNumber,
 	                                 Collection<? extends GrantedAuthority> authorities) {
 		this.id = id;
 		this.firstname = firstname;
@@ -49,7 +48,7 @@ public class UserDetailsImplementation implements UserDetails {
 		this.state = state;
 		this.zip = zip;
 		this.country = country;
-		this.phoneNumbr = phoneNumbr;
+		this.phoneNumber = phoneNumber;
 		this.authorities = authorities;
 	}
 
@@ -98,15 +97,5 @@ public class UserDetailsImplementation implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		return true;
-	}
-
-	@Override
-	public boolean equals(Object object) {
-		if (this == object)
-			return true;
-		if (object == null || getClass() != object.getClass())
-			return false;
-		UserDetailsImplementation user = (UserDetailsImplementation) object;
-		return Objects.equals(id, user.id);
 	}
 }

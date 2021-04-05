@@ -22,7 +22,7 @@ import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.Collections;
 
-//@Configuration // not needed if using @ENableWebSecurity
+//@Configuration // not needed if using @EnableWebSecurity
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(
 	// securedEnabled = true,
@@ -56,7 +56,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.cors()
-			.and().csrf().disable()
+			.and()
+				.csrf()
+					.disable()
 			.exceptionHandling()
 				.authenticationEntryPoint(unauthorizedHandler)
 			.and()
@@ -82,7 +84,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetailsService)
+		auth
+			.userDetailsService(userDetailsService)
 			.passwordEncoder(passwordEncoder());
 	}
 
