@@ -53,9 +53,12 @@ export class AdminDashboardComponent implements OnInit {
   private processPaginate(): any {
     return (data: any) => {
       // console.log('daga: ', data);
-      this.ngxSpinnerService.hide(); // hide spinner once there's data
-      this.books = data._embedded.books; // assign returned data to books
-      this.currentPage = data.page.number + 1; // starts from index 1
+      // hide spinner once there's data
+      this.ngxSpinnerService.hide();
+      // assign returned data to books
+      this.books = data._embedded.books;
+      // starts from index 1
+      this.currentPage = data.page.number + 1;
       this.totalRecords = data.page.totalElements;
       this.pageSize = data.page.size;
     };

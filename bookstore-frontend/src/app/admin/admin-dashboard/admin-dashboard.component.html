@@ -36,17 +36,15 @@
     </tr>
   </tbody>
 </table>
-<button class="btn btn-dark" routerLink="/admin/addBook">
-  Add Book
-</button>
-<hr>
+<button class="btn btn-dark" routerLink="/admin/addBook">Add Book</button>
+<hr />
 <div *ngIf="books.length > 0" class="col-md-6">
   <ngb-pagination
     class="d-flex justify-content-end"
     [(page)]="currentPage"
     [pageSize]="pageSize"
     [collectionSize]="totalRecords"
-		[maxSize]="maxSize"
+    [maxSize]="maxSize"
     (pageChange)="getBooks()"
   ></ngb-pagination>
 </div>
