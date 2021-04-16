@@ -51,25 +51,29 @@ export class LoginComponent implements OnInit {
           this.wrongCredentials = true;
         } else {
           // console.log('data: ', data.roles);
-          this.tokenService.saveToken(data.token);
-          this.tokenService.saveUser(data);
-          if (
-            this.returnUrl?.startsWith('/admin') &&
-            !data.roles.includes('ROLE_ADMIN')
-          ) {
-            // console.log('anada anda');
-            this.message = 'Unauthorized!';
-            setTimeout(() => {
-              this.router.navigate(['/']);
-            }, 250);
-          }
-          if (this.returnUrl) {
-            this.router.navigateByUrl(this.returnUrl);
-          } else {
-            this.router.navigate(['/']);
-          }
+          this.populateLogin(data);
         }
       });
+  }
+
+  private populateLogin(data: any): void {
+    this.tokenService.saveToken(data.token);
+    this.tokenService.saveUser(data);
+    if (
+      this.returnUrl?.startsWith('/admin') &&
+      !data.roles.includes('ROLE_ADMIN')
+    ) {
+      // console.log('anada anda');
+      this.message = 'Unauthorized!';
+      setTimeout(() => {
+        this.router.navigate(['/']);
+      }, 250);
+    }
+    if (this.returnUrl) {
+      this.router.navigateByUrl(this.returnUrl);
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 
   reloadPage(): void {
