@@ -45,7 +45,6 @@ export class CartService {
     this.totalQuantity.next(totalQuantityValue);
   }
 
-
   public getItemsInCart(): CartItem[] {
     return this.cartItems;
   }

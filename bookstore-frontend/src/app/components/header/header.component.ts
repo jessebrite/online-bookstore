@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { TokenStorageService } from '@services/token-storage.service';
+import { CartService } from '@services/cart.service';
 import { Role } from '@common/role.enum';
 
 @Component({
@@ -11,7 +12,10 @@ import { Role } from '@common/role.enum';
 export class HeaderComponent implements OnInit {
   roles = '';
 
-  constructor(private tokenService: TokenStorageService) {}
+  constructor(
+    private tokenService: TokenStorageService,
+    private cartService: CartService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -20,6 +24,7 @@ export class HeaderComponent implements OnInit {
   }
 
   public doLogout(): void {
+    this.cartService.cartItems.splice(0);
     this.tokenService.logout();
   }
 
