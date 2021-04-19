@@ -12,8 +12,6 @@ import { ProcessErrorService } from '@services/process-error.service';
 })
 export class CheckoutService {
   url = `${environment.apiBaseUrl}/tbl_order`;
-  // order: Order = new Order();
-  // order: Order[] = [];
 
   headers = new HttpHeaders()
     .set('Content-type', 'application/json')
