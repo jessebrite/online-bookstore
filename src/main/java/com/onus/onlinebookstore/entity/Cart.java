@@ -19,11 +19,11 @@ public class Cart {
 	@NotBlank(message = "name is required")
 	private String name;
 
-	@NotBlank
 	@Column(name = "unit_price")
+	@NotBlank(message = "unit price is required")
 	private int unitPrice;
 
-	@NotBlank
+	@NotBlank(message = "quantity is required")
 	private int quantity;
 
 	private Date createdAt;
