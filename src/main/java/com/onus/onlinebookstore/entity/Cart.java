@@ -3,7 +3,9 @@ package com.onus.onlinebookstore.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -16,14 +18,15 @@ public class Cart {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank(message = "name is required")
+//	@NotBlank(message = "name is required")
 	private String name;
 
-	@Column(name = "unit_price")
-	@NotBlank(message = "unit price is required")
-	private int unitPrice;
+	  @Column(name = "unit_price")
+	  @NotNull
+	  @Digits(message = "Price must be valid", integer = 2, fraction = 2)
+	  private double unitPrice;
 
-	@NotBlank(message = "quantity is required")
+	@NotNull(message = "quantity is required")
 	private int quantity;
 
 	private Date createdAt;
