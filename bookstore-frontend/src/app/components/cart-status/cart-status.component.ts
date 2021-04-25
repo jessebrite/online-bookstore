@@ -18,6 +18,7 @@ export class CartStatusComponent implements OnInit {
   }
 
   updateCartStatus(): void {
+    // console.log('what do we have here?')
     // subscribe to totalPrice
     this.cartService.totalPrice.subscribe((data) => (this.totalPrice = data));
     // subscribe to totalQuantity
