@@ -23,6 +23,7 @@ import { LoginComponent } from './components/login/login.component';
 import { MustMatchDirective } from './_helpers/must-match.directive';
 import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
+import { PaymentComponent } from './components/payment/payment.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { ContactComponent } from './components/contact/contact.component';
     MustMatchDirective,
     AboutComponent,
     ContactComponent,
+    PaymentComponent,
   ],
   imports: [
     BrowserModule,
