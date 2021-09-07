@@ -5,14 +5,13 @@ import lombok.Data;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Data
 @Table(name = "tbl_order")
 public class Order implements Serializable {
-	private static final long serialVersionUID  = 1L;
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,11 +25,10 @@ public class Order implements Serializable {
 
 	// @ManyToMany(mappedBy = "orders")
 	@ManyToMany(targetEntity = Cart.class)
-	Set<Cart> carts = new HashSet<>();
+	Set<Cart> carts;
 
 	@PrePersist
 	void placedAt() {
-		this.placedAt = new Date();
+		placedAt = new Date();
 	}
-
 }

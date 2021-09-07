@@ -42,7 +42,7 @@ public class User {
 
 	@NotBlank(message = "Email is required")
 	@Size(max = 45)
-	@Email
+	@Email(message = "Please enter a valid email address")
 	private final String email;
 
 	@NotBlank
